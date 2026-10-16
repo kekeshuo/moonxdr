@@ -9,6 +9,16 @@ pub suberror XdrError {
 }
 
 // Types and methods
+pub(all) struct Arm {
+  labels : Array[Int]
+  ty : Type
+}
+
+pub(all) struct Field {
+  name : String
+  ty : Type
+}
+
 pub(all) struct Limits {
   max_bytes : Int
   max_items : Int
@@ -39,6 +49,54 @@ pub fn Reader::read_string(Self, bound? : Int) -> String raise XdrError
 pub fn Reader::read_uhyper(Self) -> UInt64 raise XdrError
 pub fn Reader::read_uint(Self) -> UInt raise XdrError
 pub fn Reader::remaining(Self) -> Int
+
+pub struct Schema {
+  types : Map[String, Type]
+  constants : Map[String, Int]
+  limits : Limits
+}
+pub fn Schema::constant(Self, String) -> Int?
+pub fn Schema::empty(limits? : Limits) -> Self raise XdrError
+pub fn Schema::lookup(Self, String) -> Type raise XdrError
+pub fn Schema::resolve(Self, Type) -> Type raise XdrError
+pub fn Schema::type_names(Self) -> Array[String]
+
+pub(all) enum Type {
+  TVoid
+  TInt
+  TUInt
+  THyper
+  TUHyper
+  TBool
+  TFloat
+  TDouble
+  TString(Int)
+  TOpaque(Int, Bool)
+  TArray(Type, Int, Bool)
+  TOptional(Type)
+  TRef(String)
+  TEnum(Array[(String, Int)])
+  TStruct(Array[Field])
+  TUnion(Type, Array[Arm], Type?)
+}
+
+pub(all) enum Value {
+  VVoid
+  VInt(Int)
+  VUInt(UInt)
+  VHyper(Int64)
+  VUHyper(UInt64)
+  VBool(Bool)
+  VFloat(Float)
+  VDouble(Double)
+  VString(String)
+  VOpaque(Array[Byte])
+  VArray(Array[Value])
+  VOptional(Value?)
+  VEnum(Int)
+  VStruct(Array[(String, Value)])
+  VUnion(Int, Value)
+}
 
 pub struct Writer {
   data : Array[Byte]
