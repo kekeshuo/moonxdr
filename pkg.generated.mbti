@@ -2,6 +2,13 @@
 package "kekeshuo/moonxdr"
 
 // Values
+pub fn ident_continue(Char) -> Bool
+
+pub fn ident_start(Char) -> Bool
+
+pub fn parse_constant_number(String, offset? : Int) -> Int raise XdrError
+
+pub fn tokenize(String, limits? : Limits) -> Array[Token] raise XdrError
 
 // Errors
 pub suberror XdrError {
@@ -60,6 +67,11 @@ pub fn Schema::empty(limits? : Limits) -> Self raise XdrError
 pub fn Schema::lookup(Self, String) -> Type raise XdrError
 pub fn Schema::resolve(Self, Type) -> Type raise XdrError
 pub fn Schema::type_names(Self) -> Array[String]
+
+pub(all) struct Token {
+  text : String
+  offset : Int
+}
 
 pub(all) enum Type {
   TVoid
