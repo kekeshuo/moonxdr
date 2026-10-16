@@ -1,5 +1,6 @@
 ///|
 fn json_integer(json : Json) -> Int raise XdrError {
+  check_json_integral(json)
   @json.from_json(json) catch {
     _ => raise Invalid(0, "expected signed 32-bit JSON integer")
   }
@@ -20,6 +21,7 @@ fn json_input_at(
     (TVoid, Null) => VVoid
     (TInt, j) => VInt(json_integer(j))
     (TUInt, j) => {
+      check_json_integral(j)
       let n : UInt = @json.from_json(j) catch {
         _ => raise Invalid(0, "expected unsigned 32-bit JSON integer")
       }
@@ -134,4 +136,22 @@ pub fn from_json(
   // Reuse exact wire checks for bounds, ASCII, enum membership and fixed byte counts.
   ignore(encode(schema, type_name, value))
   value
+}
+
+///|
+fn check_json_integral(json : Json) -> Unit raise XdrError {
+  match json {
+    Number(n, repr~) => {
+      if n.is_nan() || n.is_inf() || n.floor() != n {
+        raise Invalid(0, "expected integral JSON number")
+      }
+      // Plain decimal integer lexemes prevent a rounded fractional input becoming valid.
+      if repr is Some(text) {
+        if parse_signed_decimal(text).to_double() != n {
+          raise Invalid(0, "inexact JSON integer")
+        }
+      }
+    }
+    _ => raise Invalid(0, "expected JSON number")
+  }
 }
