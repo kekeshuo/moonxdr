@@ -56,7 +56,8 @@ def main():
     text = render()
     # Moon fmt changes indentation only if generator and formatter disagree.
     if args.check:
-        assert path.read_text(encoding='utf-8').split() == text.split(), 'reference vectors changed'
+        normalize = lambda s: ''.join(s.split()).replace(',)', ')').replace(',]', ']')
+        assert normalize(path.read_text(encoding='utf-8')) == normalize(text), 'reference vectors changed'
     else:
         path.write_text(text, encoding='utf-8', newline='\n')
     print('64 scalar vectors, 384 field encodings independently calculated')

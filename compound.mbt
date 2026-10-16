@@ -23,15 +23,15 @@ pub fn Parser::compound(
   if kind == "enum" {
     self.expect("{")
     let values : Array[(String, Int)] = []
+    let seen_values : Map[Int, Bool] = Map([])
     while self.peek() != "}" {
       let name = self.identifier()
       self.expect("=")
       let value = self.value()
-      for pair in values {
-        if pair.1 == value {
-          raise Invalid(self.offset(), "duplicate enum value")
-        }
+      if seen_values.contains(value) {
+        raise Invalid(self.offset(), "duplicate enum value")
       }
+      seen_values[value] = true
       self.add_constant(name, value)
       values.push((name, value))
       if self.peek() != "," {
@@ -48,14 +48,14 @@ pub fn Parser::compound(
   if kind == "struct" {
     self.expect("{")
     let fields : Array[Field] = []
+    let seen_fields : Map[String, Bool] = Map([])
     while self.peek() != "}" {
       let field = self.declaration(depth + 1)
       self.expect(";")
-      for old in fields {
-        if old.name == field.name {
-          raise Invalid(self.offset(), "duplicate struct member")
-        }
+      if seen_fields.contains(field.name) {
+        raise Invalid(self.offset(), "duplicate struct member")
       }
+      seen_fields[field.name] = true
       fields.push(field)
     }
     self.expect("}")

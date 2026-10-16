@@ -79,14 +79,21 @@ pub fn validate_tag(tag : Type, value : Int) -> Unit raise XdrError {
 }
 
 ///|
-fn can_terminate(ty : Type, finite : Map[String, Bool]) -> Bool {
+fn can_terminate(
+  ty : Type,
+  finite : Map[String, Bool],
+  work : Budget,
+  depth : Int,
+) -> Bool raise XdrError {
+  work.visit(depth, 0)
   match ty {
     TRef(name) => finite.get(name).unwrap_or(false)
     TOptional(_) | TArray(_, _, true) => true
-    TArray(inner, n, false) => n == 0 || can_terminate(inner, finite)
+    TArray(inner, n, false) =>
+      n == 0 || can_terminate(inner, finite, work, depth + 1)
     TStruct(fields) => {
       for field in fields {
-        if !can_terminate(field.ty, finite) {
+        if !can_terminate(field.ty, finite, work, depth + 1) {
           return false
         }
       }
@@ -94,12 +101,12 @@ fn can_terminate(ty : Type, finite : Map[String, Bool]) -> Bool {
     }
     TUnion(_, arms, fallback) => {
       for arm in arms {
-        if can_terminate(arm.ty, finite) {
+        if can_terminate(arm.ty, finite, work, depth + 1) {
           return true
         }
       }
       match fallback {
-        Some(t) => can_terminate(t, finite)
+        Some(t) => can_terminate(t, finite, work, depth + 1)
         None => false
       }
     }
@@ -114,10 +121,14 @@ pub fn Schema::validate(self : Schema) -> Unit raise XdrError {
     validate_type(self, ty, 0)
   }
   let finite : Map[String, Bool] = Map([])
+  let work = Budget::{
+    left: self.limits.max_schema_tokens * 4,
+    limits: self.limits,
+  }
   for iteration = 0; iteration <= self.types.length(); iteration = iteration + 1 {
     let mut changed = false
     for name, ty in self.types {
-      if !finite.contains(name) && can_terminate(ty, finite) {
+      if !finite.contains(name) && can_terminate(ty, finite, work, 0) {
         finite[name] = true
         changed = true
       }
