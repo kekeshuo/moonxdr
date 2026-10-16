@@ -44,8 +44,10 @@ pub struct Parser {
 }
 pub fn Parser::add_constant(Self, String, Int) -> Unit raise XdrError
 pub fn Parser::add_type(Self, String, Type) -> Unit raise XdrError
+pub fn Parser::arm_type(Self, Int) -> Type raise XdrError
 pub fn Parser::base_type(Self, Int) -> Type raise XdrError
 pub fn Parser::bound(Self, String) -> Int raise XdrError
+pub fn Parser::compound(Self, String, Int) -> Type raise XdrError
 pub fn Parser::declaration(Self, Int) -> Field raise XdrError
 pub fn Parser::expect(Self, String) -> Unit raise XdrError
 pub fn Parser::identifier(Self) -> String raise XdrError
