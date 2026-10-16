@@ -6,9 +6,13 @@ pub fn decode(Schema, String, Array[Byte]) -> Value raise XdrError
 
 pub fn decode_call(Array[Byte], limits? : Limits) -> RpcCall raise XdrError
 
+pub fn decode_reply(Array[Byte], limits? : Limits) -> RpcReply raise XdrError
+
 pub fn encode(Schema, String, Value) -> Array[Byte] raise XdrError
 
 pub fn encode_call(RpcCall, limits? : Limits) -> Array[Byte] raise XdrError
+
+pub fn encode_reply(RpcReply, limits? : Limits) -> Array[Byte] raise XdrError
 
 pub fn from_hex(String, limits? : Limits) -> Array[Byte] raise XdrError
 
@@ -42,6 +46,15 @@ pub suberror XdrError {
 }
 
 // Types and methods
+pub(all) enum AcceptStatus {
+  Success(Array[Byte])
+  ProgramUnavailable
+  ProgramMismatch(UInt, UInt)
+  ProcedureUnavailable
+  GarbageArguments
+  SystemError
+}
+
 pub(all) struct Arm {
   labels : Array[Int]
   ty : Type
@@ -110,6 +123,16 @@ pub fn Reader::read_uhyper(Self) -> UInt64 raise XdrError
 pub fn Reader::read_uint(Self) -> UInt raise XdrError
 pub fn Reader::remaining(Self) -> Int
 
+pub(all) enum RejectStatus {
+  RpcMismatch(UInt, UInt)
+  AuthError(UInt)
+}
+
+pub(all) enum ReplyBody {
+  Accepted(OpaqueAuth, AcceptStatus)
+  Rejected(RejectStatus)
+}
+
 pub(all) struct RpcCall {
   xid : UInt
   program : UInt
@@ -118,6 +141,11 @@ pub(all) struct RpcCall {
   credential : OpaqueAuth
   verifier : OpaqueAuth
   arguments : Array[Byte]
+}
+
+pub(all) struct RpcReply {
+  xid : UInt
+  body : ReplyBody
 }
 
 pub struct Schema {
