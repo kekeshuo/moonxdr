@@ -1,0 +1,36 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "kekeshuo/moonxdr"
+
+// Values
+
+// Errors
+pub suberror XdrError {
+  Invalid(Int, String)
+}
+
+// Types and methods
+pub(all) struct Limits {
+  max_bytes : Int
+  max_items : Int
+  max_depth : Int
+  max_schema_tokens : Int
+}
+pub fn Limits::default() -> Self
+pub fn Limits::validate(Self) -> Unit raise XdrError
+
+pub struct Reader {
+  data : Array[Byte]
+  mut pos : Int
+  limits : Limits
+}
+pub fn Reader::finish(Self) -> Unit raise XdrError
+pub fn Reader::new(Array[Byte], limits? : Limits) -> Self raise XdrError
+pub fn Reader::position(Self) -> Int
+pub fn Reader::read_int(Self) -> Int raise XdrError
+pub fn Reader::read_raw(Self, Int) -> Array[Byte] raise XdrError
+pub fn Reader::read_uint(Self) -> UInt raise XdrError
+pub fn Reader::remaining(Self) -> Int
+
+// Type aliases
+
+// Traits
