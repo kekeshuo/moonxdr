@@ -60,6 +60,16 @@ pub(all) struct Arm {
   ty : Type
 }
 
+pub(all) struct AuthSys {
+  stamp : UInt
+  machine : String
+  uid : UInt
+  gid : UInt
+  groups : Array[UInt]
+}
+pub fn AuthSys::from_auth(OpaqueAuth) -> Self raise XdrError
+pub fn AuthSys::to_auth(Self) -> OpaqueAuth raise XdrError
+
 pub(all) struct Field {
   name : String
   ty : Type
