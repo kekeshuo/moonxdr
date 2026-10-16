@@ -1,0 +1,5 @@
+import {
+  "kekeshuo/moonxdr" @xdr,
+}
+
+pkgtype(kind: "executable")
