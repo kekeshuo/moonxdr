@@ -14,6 +14,8 @@ pub fn encode_call(RpcCall, limits? : Limits) -> Array[Byte] raise XdrError
 
 pub fn encode_reply(RpcReply, limits? : Limits) -> Array[Byte] raise XdrError
 
+pub fn fragment_record(Array[Byte], Int, limits? : Limits) -> Array[Byte] raise XdrError
+
 pub fn from_hex(String, limits? : Limits) -> Array[Byte] raise XdrError
 
 pub fn from_json(Schema, String, Json) -> Value raise XdrError
