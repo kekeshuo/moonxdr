@@ -6,6 +6,8 @@ pub fn decode(Schema, String, Array[Byte]) -> Value raise XdrError
 
 pub fn encode(Schema, String, Value) -> Array[Byte] raise XdrError
 
+pub fn from_hex(String, limits? : Limits) -> Array[Byte] raise XdrError
+
 pub fn ident_continue(Char) -> Bool
 
 pub fn ident_start(Char) -> Bool
@@ -13,6 +15,12 @@ pub fn ident_start(Char) -> Bool
 pub fn parse_constant_number(String, offset? : Int) -> Int raise XdrError
 
 pub fn parse_schema(String, limits? : Limits) -> Schema raise XdrError
+
+pub fn parse_signed_decimal(String) -> Int64 raise XdrError
+
+pub fn parse_unsigned_decimal(String) -> UInt64 raise XdrError
+
+pub fn to_hex(Array[Byte]) -> String
 
 pub fn tokenize(String, limits? : Limits) -> Array[Token] raise XdrError
 
