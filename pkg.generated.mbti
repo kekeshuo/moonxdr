@@ -4,7 +4,11 @@ package "kekeshuo/moonxdr"
 // Values
 pub fn decode(Schema, String, Array[Byte]) -> Value raise XdrError
 
+pub fn decode_call(Array[Byte], limits? : Limits) -> RpcCall raise XdrError
+
 pub fn encode(Schema, String, Value) -> Array[Byte] raise XdrError
+
+pub fn encode_call(RpcCall, limits? : Limits) -> Array[Byte] raise XdrError
 
 pub fn from_hex(String, limits? : Limits) -> Array[Byte] raise XdrError
 
@@ -57,6 +61,12 @@ pub(all) struct Limits {
 pub fn Limits::default() -> Self
 pub fn Limits::validate(Self) -> Unit raise XdrError
 
+pub(all) struct OpaqueAuth {
+  flavor : UInt
+  body : Array[Byte]
+}
+pub fn OpaqueAuth::none() -> Self
+
 pub struct Parser {
   tokens : Array[Token]
   mut cursor : Int
@@ -85,6 +95,7 @@ pub struct Reader {
 pub fn Reader::finish(Self) -> Unit raise XdrError
 pub fn Reader::new(Array[Byte], limits? : Limits) -> Self raise XdrError
 pub fn Reader::position(Self) -> Int
+pub fn Reader::read_auth(Self) -> OpaqueAuth raise XdrError
 pub fn Reader::read_bool(Self) -> Bool raise XdrError
 pub fn Reader::read_double(Self) -> Double raise XdrError
 pub fn Reader::read_fixed(Self, Int) -> Array[Byte] raise XdrError
@@ -98,6 +109,16 @@ pub fn Reader::read_string(Self, bound? : Int) -> String raise XdrError
 pub fn Reader::read_uhyper(Self) -> UInt64 raise XdrError
 pub fn Reader::read_uint(Self) -> UInt raise XdrError
 pub fn Reader::remaining(Self) -> Int
+
+pub(all) struct RpcCall {
+  xid : UInt
+  program : UInt
+  version : UInt
+  procedure : UInt
+  credential : OpaqueAuth
+  verifier : OpaqueAuth
+  arguments : Array[Byte]
+}
 
 pub struct Schema {
   types : Map[String, Type]
@@ -160,6 +181,7 @@ pub struct Writer {
 pub fn Writer::bytes(Self) -> Array[Byte]
 pub fn Writer::length(Self) -> Int
 pub fn Writer::new(limits? : Limits) -> Self raise XdrError
+pub fn Writer::write_auth(Self, OpaqueAuth) -> Unit raise XdrError
 pub fn Writer::write_bool(Self, Bool) -> Unit raise XdrError
 pub fn Writer::write_double(Self, Double) -> Unit raise XdrError
 pub fn Writer::write_fixed(Self, Array[Byte]) -> Unit raise XdrError
