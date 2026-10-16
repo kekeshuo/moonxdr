@@ -135,6 +135,20 @@ pub fn Reader::read_uhyper(Self) -> UInt64 raise XdrError
 pub fn Reader::read_uint(Self) -> UInt raise XdrError
 pub fn Reader::remaining(Self) -> Int
 
+pub struct RecordDecoder {
+  limits : Limits
+  record : Array[Byte]
+  mut marker : UInt
+  mut header_bytes : Int
+  mut body_left : Int
+  mut last : Bool
+  mut fragments : Int
+  mut poisoned : Bool
+}
+pub fn RecordDecoder::feed(Self, Array[Byte]) -> Array[Array[Byte]] raise XdrError
+pub fn RecordDecoder::finish(Self) -> Unit raise XdrError
+pub fn RecordDecoder::new(limits? : Limits) -> Self raise XdrError
+
 pub(all) enum RejectStatus {
   RpcMismatch(UInt, UInt)
   AuthError(UInt)
