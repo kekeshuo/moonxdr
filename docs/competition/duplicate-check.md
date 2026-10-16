@@ -41,9 +41,9 @@ Sources inspected / catalogued:
 - https://mooncakes.io/docs/fundon/vtty
 - https://github.com/pindash-io/vtty
 - https://mooncakes.io/docs/shop1111/moon_sourcemap
-- https://github.com/shop1111/moon_sourcemap
+- https://github.com/shop1111/moon-sourcemap
 - https://mooncakes.io/docs/hrwqe/cf_ocean
-- https://github.com/hrwqe/cf_ocean
+- https://github.com/hrwqe/moonbit-cf-ocean
 - https://github.com/moonbitlang/awesome-moonbit
 - https://www.rfc-editor.org/rfc/rfc4506
 - https://www.rfc-editor.org/rfc/rfc5531
@@ -103,3 +103,11 @@ search must repeat core behavior terms before publication.
 High totals do not override hard failures. Selected MoonXDR has independently
 useful parser/runtime/JSON/IO/envelope/stream components, with no full-RPC claim.
 '''
+
+## Release-time reverse recheck
+
+Repeated on 2026-10-16 after implementation: MoonCakes `xdr`, `rpcgen`, `rfc5531`
+returned successful empty result arrays (limit 100). GitHub repository searches
+`xdr language:MoonBit`, `"ONC RPC" moonbit`, `"XDR schema" moonbit` each reported
+0 total results (first-100 window). This recheck supplements, not replaces, the
+source-level adjacent-project review above. It has the same indexing limitations.
