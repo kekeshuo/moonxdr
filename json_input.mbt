@@ -56,8 +56,16 @@ fn json_input_at(
       VArray(out)
     }
     (TOptional(_), Null) => VOptional(None)
-    (TOptional(inner), item) =>
+    (TOptional(inner), Object(object)) => {
+      if object.length() != 1 {
+        raise Invalid(0, "optional JSON requires one some member")
+      }
+      let item = match object.get("some") {
+        Some(j) => j
+        None => raise Invalid(0, "missing optional some member")
+      }
       VOptional(Some(json_input_at(schema, inner, item, budget, depth + 1)))
+    }
     (TEnum(labels), String(name)) => {
       for pair in labels {
         if pair.0 == name {

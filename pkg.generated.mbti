@@ -24,6 +24,8 @@ pub fn parse_unsigned_decimal(String) -> UInt64 raise XdrError
 
 pub fn to_hex(Array[Byte]) -> String
 
+pub fn to_json(Schema, String, Value) -> Json raise XdrError
+
 pub fn tokenize(String, limits? : Limits) -> Array[Token] raise XdrError
 
 pub fn union_arm(Array[Arm], Type?, Int) -> Type raise XdrError
