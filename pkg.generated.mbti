@@ -8,6 +8,8 @@ pub fn ident_start(Char) -> Bool
 
 pub fn parse_constant_number(String, offset? : Int) -> Int raise XdrError
 
+pub fn parse_schema(String, limits? : Limits) -> Schema raise XdrError
+
 pub fn tokenize(String, limits? : Limits) -> Array[Token] raise XdrError
 
 // Errors
@@ -34,6 +36,24 @@ pub(all) struct Limits {
 }
 pub fn Limits::default() -> Self
 pub fn Limits::validate(Self) -> Unit raise XdrError
+
+pub struct Parser {
+  tokens : Array[Token]
+  mut cursor : Int
+  schema : Schema
+}
+pub fn Parser::add_constant(Self, String, Int) -> Unit raise XdrError
+pub fn Parser::add_type(Self, String, Type) -> Unit raise XdrError
+pub fn Parser::base_type(Self, Int) -> Type raise XdrError
+pub fn Parser::bound(Self, String) -> Int raise XdrError
+pub fn Parser::declaration(Self, Int) -> Field raise XdrError
+pub fn Parser::expect(Self, String) -> Unit raise XdrError
+pub fn Parser::identifier(Self) -> String raise XdrError
+pub fn Parser::new(String, limits? : Limits) -> Self raise XdrError
+pub fn Parser::offset(Self) -> Int
+pub fn Parser::peek(Self) -> String
+pub fn Parser::take(Self) -> String raise XdrError
+pub fn Parser::value(Self) -> Int raise XdrError
 
 pub struct Reader {
   data : Array[Byte]
