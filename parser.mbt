@@ -112,6 +112,9 @@ pub fn Parser::base_type(self : Parser, depth : Int) -> Type raise XdrError {
   }
   match self.take() {
     "void" => TVoid
+    "enum" => self.compound("enum", depth + 1)
+    "struct" => self.compound("struct", depth + 1)
+    "union" => self.compound("union", depth + 1)
     "int" => TInt
     "hyper" => THyper
     "bool" => TBool
@@ -217,8 +220,15 @@ pub fn parse_schema(
         p.expect(";")
         p.add_type(f.name, f.ty)
       }
+      "enum" | "struct" | "union" as kind => {
+        let name = p.identifier()
+        let ty = p.compound(kind, 0)
+        p.expect(";")
+        p.add_type(name, ty)
+      }
       _ => raise Invalid(p.offset(), "expected definition")
     }
   }
+  p.schema.validate()
   p.schema
 }

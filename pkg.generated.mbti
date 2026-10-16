@@ -12,6 +12,10 @@ pub fn parse_schema(String, limits? : Limits) -> Schema raise XdrError
 
 pub fn tokenize(String, limits? : Limits) -> Array[Token] raise XdrError
 
+pub fn union_arm(Array[Arm], Type?, Int) -> Type raise XdrError
+
+pub fn validate_tag(Type, Int) -> Unit raise XdrError
+
 // Errors
 pub suberror XdrError {
   Invalid(Int, String)
@@ -89,6 +93,7 @@ pub fn Schema::empty(limits? : Limits) -> Self raise XdrError
 pub fn Schema::lookup(Self, String) -> Type raise XdrError
 pub fn Schema::resolve(Self, Type) -> Type raise XdrError
 pub fn Schema::type_names(Self) -> Array[String]
+pub fn Schema::validate(Self) -> Unit raise XdrError
 
 pub(all) struct Token {
   text : String
