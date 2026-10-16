@@ -2,6 +2,8 @@
 package "kekeshuo/moonxdr"
 
 // Values
+pub fn encode(Schema, String, Value) -> Array[Byte] raise XdrError
+
 pub fn ident_continue(Char) -> Bool
 
 pub fn ident_start(Char) -> Bool
