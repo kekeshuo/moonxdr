@@ -26,10 +26,31 @@ pub struct Reader {
 pub fn Reader::finish(Self) -> Unit raise XdrError
 pub fn Reader::new(Array[Byte], limits? : Limits) -> Self raise XdrError
 pub fn Reader::position(Self) -> Int
+pub fn Reader::read_bool(Self) -> Bool raise XdrError
+pub fn Reader::read_double(Self) -> Double raise XdrError
+pub fn Reader::read_float(Self) -> Float raise XdrError
+pub fn Reader::read_hyper(Self) -> Int64 raise XdrError
 pub fn Reader::read_int(Self) -> Int raise XdrError
 pub fn Reader::read_raw(Self, Int) -> Array[Byte] raise XdrError
+pub fn Reader::read_uhyper(Self) -> UInt64 raise XdrError
 pub fn Reader::read_uint(Self) -> UInt raise XdrError
 pub fn Reader::remaining(Self) -> Int
+
+pub struct Writer {
+  data : Array[Byte]
+  limits : Limits
+}
+pub fn Writer::bytes(Self) -> Array[Byte]
+pub fn Writer::length(Self) -> Int
+pub fn Writer::new(limits? : Limits) -> Self raise XdrError
+pub fn Writer::write_bool(Self, Bool) -> Unit raise XdrError
+pub fn Writer::write_double(Self, Double) -> Unit raise XdrError
+pub fn Writer::write_float(Self, Float) -> Unit raise XdrError
+pub fn Writer::write_hyper(Self, Int64) -> Unit raise XdrError
+pub fn Writer::write_int(Self, Int) -> Unit raise XdrError
+pub fn Writer::write_raw(Self, Array[Byte]) -> Unit raise XdrError
+pub fn Writer::write_uhyper(Self, UInt64) -> Unit raise XdrError
+pub fn Writer::write_uint(Self, UInt) -> Unit raise XdrError
 
 // Type aliases
 
