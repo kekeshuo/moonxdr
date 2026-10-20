@@ -77,7 +77,7 @@ python scripts/reference128.py --check
 python scripts/audit.py
 ```
 
-45 个测试包含 64 个独立 Python struct 向量（384 个标量字段）、176 个 binary128 网络字节向量、140 个有理数 oracle 的 binary64 精确扩展向量、RFC 第 7 节样例字节，以及长度/溢出/填充/递归/分片错误测试。随机数据固定种子、可再生成，测试与生成数据不计入生产代码行数。未给出性能或外部标准认证结论。
+46 个测试包含 64 个独立 Python struct 向量（384 个标量字段）、176 个 binary128 网络字节向量、140 个有理数 oracle 的 binary64 精确扩展向量、RFC 第 7 节样例字节，以及长度/溢出/填充/递归/分片错误测试。随机数据固定种子、可再生成，测试与生成数据不计入生产代码行数。未给出性能或外部标准认证结论。
 
 0.2.0 的兼容变更：声明上界改为 UInt，常量查询返回 BigInt，联合标签及 VUnion 判别值改为 Int64（明确写标签时使用 `L` 后缀）。旧 `parse_constant_number` 仅保留为 signed32 兼容入口，新解析使用 `parse_integer_constant`。旧发布版本不覆盖。
 

@@ -10,6 +10,8 @@
 - Separate uint32 protocol bounds (including omitted UINT32_MAX) from operation caps.
 - Enforce union variable scopes and const-bound provenance; accept FF/VT whitespace,
   reject empty fixed bounds/trailing enum commas/named void/invalid identifiers.
+- Accept standalone zero-width void declarations in structs and no-name typedefs,
+  without inventing a named field; continue rejecting named void and void discriminants.
 - Check string byte budgets before copying; retain embedded ASCII NUL.
 - Add independent 176-word/140-rational binary128 fixtures, RFC section 7 wire test,
   full clause matrix, Chinese README and a fourth cross-target workflow.

@@ -22,7 +22,7 @@ source and reproducible tests, not as a replacement for them.
 | 4.12–4.13 | Fixed/variable arrays; omitted bound is UINT32_MAX | parser; marshal/unmarshal | conformance unsigned bounds and independent-budget tests |
 | 4.14 | Ordered structs, distinct member names and typed fields | compound; marshal/unmarshal | schema/runtime/json tests; RFC section 7 bytes |
 | 4.15 | int/uint/bool/enum or alias discriminants, legal distinct cases, default | compound; validate; marshal/unmarshal | literal 4294967295 case; signed/unsigned range rejection; default and typedef tests |
-| 4.16 | Zero-byte void arm payload | compound; marshal/unmarshal | unsigned max void union; optional/boolean union equivalence |
+| 4.16 | Zero-byte void arms and anonymous declarations | compound; marshal/unmarshal | standalone struct/typedef void regression; unsigned max void union; optional/boolean union equivalence |
 | 4.17 | Exact decimal/octal/hex constants, contextual range checks | constants; parser | beyond-128-bit positive/negative constants; malformed syntax and typed overflow tests |
 | 4.18 | Type aliases and typedef discriminants | parser; schema.resolve | schema_wbtest; conformance unsigned alias tests |
 | 4.19 | Optional data and terminating recursive pointers | parser; graph validation; recursive runtime | schema/runtime/limits tests; optional union equivalence |

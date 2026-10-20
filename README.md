@@ -134,7 +134,7 @@ python scripts/reference128.py --check
 python scripts/audit.py
 ```
 
-45 tests include 64 independent Python struct vectors (384 scalar fields), 176
+46 tests include 64 independent Python struct vectors (384 scalar fields), 176
 binary128 word vectors, 140 exact rational binary64-widening vectors, the RFC
 section 7 example bytes, UINT32_MAX union regressions, malformed lengths, recursion
 and record-stream boundaries. Fixtures are synthetic; tests/generated data do not

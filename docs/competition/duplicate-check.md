@@ -102,7 +102,6 @@ search must repeat core behavior terms before publication.
 
 High totals do not override hard failures. Selected MoonXDR has independently
 useful parser/runtime/JSON/IO/envelope/stream components, with no full-RPC claim.
-'''
 
 ## Release-time reverse recheck
 
