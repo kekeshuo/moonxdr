@@ -43,6 +43,7 @@ fn json_input_at(
       }
       VDouble(n)
     }
+    (TQuadruple, String(s)) => VQuadruple(Quadruple::from_hex(s))
     (TString(_), String(s)) => VString(s)
     (TOpaque(_, _), String(s)) => VOpaque(from_hex(s, limits=schema.limits))
     (TArray(inner, bound, variable), Array(items)) => {

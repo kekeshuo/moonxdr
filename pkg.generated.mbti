@@ -3,6 +3,7 @@ package "kekeshuo/moonxdr"
 
 import {
   "moonbitlang/core/bigint",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -118,6 +119,34 @@ pub fn Parser::peek(Self) -> String
 pub fn Parser::take(Self) -> String raise XdrError
 pub fn Parser::value(Self) -> @bigint.BigInt raise XdrError
 
+pub(all) struct Quadruple {
+  high : UInt64
+  low : UInt64
+} derive(Eq, @debug.Debug)
+pub fn Quadruple::classify(Self) -> QuadrupleClass
+pub fn Quadruple::equal(Self, Self) -> Bool
+pub fn Quadruple::exponent(Self) -> Int
+pub fn Quadruple::fraction(Self) -> (UInt64, UInt64)
+pub fn Quadruple::from_double(Double) -> Self
+pub fn Quadruple::from_hex(String) -> Self raise XdrError
+pub fn Quadruple::not_equal(Self, Self) -> Bool
+pub fn Quadruple::sign(Self) -> Bool
+pub fn Quadruple::to_bytes(Self) -> Array[Byte]
+pub fn Quadruple::to_hex(Self) -> String
+pub fn Quadruple::to_repr(Self) -> @debug.Repr
+
+pub(all) enum QuadrupleClass {
+  Zero
+  Subnormal
+  Normal
+  Infinite
+  QuietNaN
+  SignalingNaN
+} derive(Eq, @debug.Debug)
+pub fn QuadrupleClass::equal(Self, Self) -> Bool
+pub fn QuadrupleClass::not_equal(Self, Self) -> Bool
+pub fn QuadrupleClass::to_repr(Self) -> @debug.Repr
+
 pub struct Reader {
   data : Array[Byte]
   mut pos : Int
@@ -135,6 +164,7 @@ pub fn Reader::read_hyper(Self) -> Int64 raise XdrError
 pub fn Reader::read_int(Self) -> Int raise XdrError
 pub fn Reader::read_length(Self, UInt) -> Int raise XdrError
 pub fn Reader::read_opaque(Self, bound? : UInt) -> Array[Byte] raise XdrError
+pub fn Reader::read_quadruple(Self) -> Quadruple raise XdrError
 pub fn Reader::read_raw(Self, Int) -> Array[Byte] raise XdrError
 pub fn Reader::read_string(Self, bound? : UInt) -> String raise XdrError
 pub fn Reader::read_uhyper(Self) -> UInt64 raise XdrError
@@ -206,6 +236,7 @@ pub(all) enum Type {
   TBool
   TFloat
   TDouble
+  TQuadruple
   TString(UInt)
   TOpaque(UInt, Bool)
   TArray(Type, UInt, Bool)
@@ -225,6 +256,7 @@ pub(all) enum Value {
   VBool(Bool)
   VFloat(Float)
   VDouble(Double)
+  VQuadruple(Quadruple)
   VString(String)
   VOpaque(Array[Byte])
   VArray(Array[Value])
@@ -249,6 +281,7 @@ pub fn Writer::write_float(Self, Float) -> Unit raise XdrError
 pub fn Writer::write_hyper(Self, Int64) -> Unit raise XdrError
 pub fn Writer::write_int(Self, Int) -> Unit raise XdrError
 pub fn Writer::write_opaque(Self, Array[Byte], bound? : UInt) -> Unit raise XdrError
+pub fn Writer::write_quadruple(Self, Quadruple) -> Unit raise XdrError
 pub fn Writer::write_raw(Self, Array[Byte]) -> Unit raise XdrError
 pub fn Writer::write_string(Self, String, bound? : UInt) -> Unit raise XdrError
 pub fn Writer::write_uhyper(Self, UInt64) -> Unit raise XdrError

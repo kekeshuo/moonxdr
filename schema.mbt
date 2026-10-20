@@ -9,6 +9,7 @@ pub(all) enum Type {
   TBool
   TFloat
   TDouble
+  TQuadruple
   TString(UInt)
   TOpaque(UInt, Bool)
   TArray(Type, UInt, Bool)
@@ -84,6 +85,7 @@ pub(all) enum Value {
   VBool(Bool)
   VFloat(Float)
   VDouble(Double)
+  VQuadruple(Quadruple)
   VString(String)
   VOpaque(Array[Byte])
   VArray(Array[Value])

@@ -120,6 +120,7 @@ pub fn Parser::base_type(self : Parser, depth : Int) -> Type raise XdrError {
     "bool" => TBool
     "float" => TFloat
     "double" => TDouble
+    "quadruple" => TQuadruple
     "unsigned" =>
       match self.take() {
         "int" => TUInt

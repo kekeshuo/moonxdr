@@ -40,6 +40,7 @@ fn encode_at(
     (TBool, VBool(n)) => w.write_bool(n)
     (TFloat, VFloat(n)) => w.write_float(n)
     (TDouble, VDouble(n)) => w.write_double(n)
+    (TQuadruple, VQuadruple(n)) => w.write_quadruple(n)
     (TString(bound), VString(s)) => w.write_string(s, bound~)
     (TOpaque(bound, variable), VOpaque(b)) =>
       if variable {

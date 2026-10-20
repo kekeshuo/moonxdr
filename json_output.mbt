@@ -25,6 +25,7 @@ fn json_output_at(
       }
       n.to_json()
     }
+    VQuadruple(q) => Json::string(q.to_hex())
     VString(s) => Json::string(s)
     VOpaque(bytes) => Json::string(to_hex(bytes))
     VArray(items) => {

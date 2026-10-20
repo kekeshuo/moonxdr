@@ -17,6 +17,7 @@ fn decode_at(
     TBool => VBool(r.read_bool())
     TFloat => VFloat(r.read_float())
     TDouble => VDouble(r.read_double())
+    TQuadruple => VQuadruple(r.read_quadruple())
     TString(bound) => VString(r.read_string(bound~))
     TOpaque(bound, variable) =>
       VOpaque(
