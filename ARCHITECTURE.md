@@ -2,10 +2,15 @@
 
 `lexer` → `parser` + `compound` → `Schema::validate` creates a named graph of
 algebraic `Type` nodes. The lexer retains source character offsets; constant
-parsing is checked signed32 arithmetic. Compound duplicate sets use maps.
+parsing stores exact BigInt values with contextual signed32/uint32 validation. Compound duplicate sets use maps.
 A bounded fixed-point computes whether each named graph node has any finite value;
 mandatory cycles fail, while optional/variable-array recursion can terminate.
 Typedef resolution and inline/recursive traversal have explicit depth bounds.
+
+`quadruple` stores binary128 as two UInt64 words, with exact binary64 widening,
+class inspection and lossless schema/JSON integration. Union tags use Int64 to
+distinguish negative signed32 values from the full unsigned32 domain. Declared
+array/byte bounds are UInt; runtime limits are independent checked narrowing.
 
 `bounds`, `scalars`, `opaque` implement owned, network-order binary IO. Readers copy
 input, writers return copies; length checks happen before allocation. Padding is
@@ -34,3 +39,4 @@ there is no transport flow control or scheduling in this library.
 
 Tests are not included in production LOC. The reference vector file is generated
 test data only. Examples are external package consumers, also excluded from LOC.
+

@@ -9,3 +9,7 @@ Python struct vectors, a bounded CPython xdrlib comparison, strict compiler chec
 and real multi-target CI are the engineering checks. They do not imply organizer
 approval, full RFC certification or absence of all bugs. No private application,
 contact details or publication credentials belong in this repository.
+
+Binary128/sign/constant remediation, exact rational fixtures and the clause matrix
+were also AI-assisted. The matrix is an engineering account, not an external
+certification; organizer review remains independent of engineering delivery.

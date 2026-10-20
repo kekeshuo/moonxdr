@@ -111,3 +111,59 @@ returned successful empty result arrays (limit 100). GitHub repository searches
 `xdr language:MoonBit`, `"ONC RPC" moonbit`, `"XDR schema" moonbit` each reported
 0 total results (first-100 window). This recheck supplements, not replaces, the
 source-level adjacent-project review above. It has the same indexing limitations.
+
+## RFC4506 repair reverse recheck — 2026-10-20
+
+This is a repair of the existing MoonXDR, not a new topic. The earlier delivery
+excluded quadruple and used signed32 constants; those were real limitations, not
+properties of RFC4506. Version 0.2.0 removes those restrictions and targets every
+RFC4506 representation/declaration category. See the clause-to-test matrix in
+[the coverage document](../rfc4506-coverage.md). Resource budgets, convenience
+syntax extensions and the distinction between exchange and arithmetic remain
+explicit. This record does not certify strict grammar membership or acceptance.
+
+Repeated MoonCakes CLI searches, limit 50 per term: `xdr`, `rfc4506`, `onc rpc`,
+`XDR schema` found the existing `kekeshuo/moonxdr@0.1.0`; `rpcgen` and `sunrpc`
+returned no modules; `netcdf` found `hrwqe/cf_ocean@0.1.4`. Expanded `external data
+representation`, `serialization`, `quadruple`, `binary128` searches were reviewed;
+serialization hit the 50-result cap, not an exhaustive registry scan. In
+particular **Luna-Flow/floating@0.10.0 already provides binary128**. We do not claim
+MoonBit's first binary128 representation, arithmetic or hexadecimal interchange.
+
+GitHub repository queries: `xdr language:MoonBit` and `"ONC RPC" moonbit` each
+returned our one repository, `"RFC4506" moonbit` and `"quadruple"
+language:MoonBit` returned zero. Code search `"xdr" language:MoonBit` reported
+105 results (first-page inspection includes OOXML drawing namespace uses in
+moonbitlang/office.mbt, not XDR codec evidence); `"RFC4506" language:MoonBit` and
+`"rpcgen" language:MoonBit` returned zero. The official awesome-moonbit list was
+read at 0bb1697fb50405cceccbca3d72a1e92dc45f1ebe, without an XDR entry. Code indexing,
+result windows, broad-query caps and unindexed/private projects limit conclusions.
+The shared registry's MoonXDR, MoonWire, MoonIon, moonfbs and related fingerprints
+were revisited; extending this existing XDR implementation is preferable to a
+second renamed codec or framing-only project. Historical records are preserved.
+
+### Source-reviewed adjacent projects
+
+| Project / maintained scope | Users, inputs and actual behavior | Relationship / decision |
+| --- | --- | --- |
+| [Luna-Flow/floating](https://github.com/Luna-Flow/floating), MoonCakes 0.10.0, Apache-2.0 | Numerical users; BinFloat/BinCoeff, contexts/rounding/flags, binary16/32/64/128 formats. `BinaryInterchange::from_hex`, `from_bits`, `to_hex`, `to_bin_float` explicitly implement binary128 fields and NaN payloads; IEEE tests exercise interchange and arithmetic. | Same-direction component overlap in raw IEEE128 exchange, **not a generic XDR schema/RPC implementation**. MoonXDR's two-word Quadruple is a codec value integrated with `.x` declarations, unions, nested values and 16-byte network IO, not a competing arithmetic library. Hex can be an integration boundary; no floating dependency, port or copied source is included. Rebuilding numerical arithmetic would fail the scope gate. |
+| [hrwqe/moonbit-cf-ocean](https://github.com/hrwqe/moonbit-cf-ocean), MoonCakes cf_ocean 0.1.4, Apache-2.0, last pushed 2026-08-24 | Ocean/NetCDF readers; CDF1/2 magic, dimensions/attributes/variables and ByteBuffer numeric reads; actual binary reader, interface and tests reviewed again. | Adjacent XDR-derived file format, not `.x` declaration parsing, typed discriminated unions, arbitrary schema-driven values or RPC envelopes. General codec requirements cannot be met by its current dataset API without changing its main task. |
+
+Floating evidence: README blob `37ec161ae13a28372a39e70c8fca2866414fa08f`,
+bin_float README `69d437347cfea123ee78a4b0db6897e86d518c64`, interface
+`4518e3a5a476da6dc9b22346afdf4d4401f4b36e`, **actual interchange implementation**
+`40d2030fa37001f729e7d4fe3e7b87c17c9e564f`, IEEE tests
+`613ab6a4c6a73c99c6adab729381df443437abac`. Registry manifest 0.10.0 reported
+successful build and checksum
+`814c1ec1f2bdb5442fc70d588360c308ae480f441fa7c0e39994c8792e7aae56`.
+The GitHub source snapshot is distinguished from the registry version rather
+than assumed byte-identical. cf_ocean reader blob
+`ac1fc4507897442ac69134a27bcfec4fdd4b1035`, tests
+`43b5f42ec57c9cf4c45917f762796d0f307280df`, interface
+`f679c744012d788ef7f5bf9e1ccfdb65a7cb9071`.
+
+**Decision:** in this bounded, source-reviewed scope no mature direct replacement
+for the combined generic XDR declaration/runtime workflow was found. Repair the
+existing implementation rather than start another project. This conclusion does
+not deny component overlaps, prove universal uniqueness or guarantee contest
+approval. Raw operation evidence stays outside the public project.
