@@ -242,3 +242,16 @@ test "array bound identifiers require const definitions not enum symbols" {
   let s = parse_schema("const N=4294967295; typedef opaque Blob<N>;")
   assert_true(s.lookup("Blob") is TOpaque(4294967295U, true))
 }
+
+///|
+test "standalone void declarations preserve RFC grammar zero width" {
+  let s = parse_schema(
+    "typedef void; struct Empty { void; }; struct Record { void; int x; void; };",
+  )
+  assert_true(s.lookup("Empty") is TStruct([]))
+  assert_eq(to_hex(encode(s, "Empty", VStruct([]))), "")
+  assert_true(decode(s, "Empty", []) is VStruct([]))
+  assert_eq(to_hex(encode(s, "Record", VStruct([("x", VInt(7))]))), "00000007")
+  assert_true(rejects_schema("struct Bad { void named; };"))
+  assert_true(rejects_schema("union Bad switch(void) { case 0: void; };"))
+}

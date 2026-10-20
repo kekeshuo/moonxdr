@@ -61,9 +61,15 @@ pub fn Parser::compound(
     self.expect("{")
     let fields : Array[Field] = []
     let seen_fields : Map[String, Bool] = Map([])
+    let mut declarations = 0
     while self.peek() != "}" {
       let field = self.declaration(depth + 1)
       self.expect(";")
+      declarations += 1
+      // Anonymous void declarations contribute neither a field name nor bytes.
+      if field.ty is TVoid {
+        continue
+      }
       if seen_fields.contains(field.name) {
         raise Invalid(self.offset(), "duplicate struct member")
       }
@@ -71,7 +77,7 @@ pub fn Parser::compound(
       fields.push(field)
     }
     self.expect("}")
-    if fields.is_empty() {
+    if declarations == 0 {
       raise Invalid(self.offset(), "empty struct")
     }
     return TStruct(fields)

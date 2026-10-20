@@ -168,10 +168,8 @@ pub fn Parser::declaration(self : Parser, depth : Int) -> Field raise XdrError {
   }
   let base = self.base_type(depth)
   if base is TVoid {
-    raise Invalid(
-      self.offset(),
-      "void declaration must stand alone in a union arm",
-    )
+    // RFC 6.3 permits a standalone zero-width declaration, never a named void.
+    return { name: "", ty: TVoid, }
   }
   let pointer = self.peek() == "*"
   if pointer {
@@ -238,7 +236,10 @@ pub fn parse_schema(
       "typedef" => {
         let f = p.declaration(0)
         p.expect(";")
-        p.add_type(f.name, f.ty)
+        // A standalone `typedef void;` introduces no identifier or data.
+        if !(f.ty is TVoid) {
+          p.add_type(f.name, f.ty)
+        }
       }
       "enum" | "struct" | "union" as kind => {
         let name = p.identifier()
