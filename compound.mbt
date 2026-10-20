@@ -1,11 +1,19 @@
 ///|
-pub fn Parser::arm_type(self : Parser, depth : Int) -> Type raise XdrError {
+pub fn Parser::arm_type(
+  self : Parser,
+  depth : Int,
+  names? : Map[String, Bool] = Map([]),
+) -> Type raise XdrError {
   if self.peek() == "void" {
     self.expect("void")
     self.expect(";")
     TVoid
   } else {
     let field = self.declaration(depth)
+    if names.contains(field.name) {
+      raise Invalid(self.offset(), "duplicate union member")
+    }
+    names[field.name] = true
     self.expect(";")
     field.ty
   }
@@ -39,6 +47,9 @@ pub fn Parser::compound(
         break
       }
       self.expect(",")
+      if self.peek() == "}" {
+        raise Invalid(self.offset(), "trailing enum comma")
+      }
     }
     self.expect("}")
     if values.is_empty() {
@@ -73,6 +84,8 @@ pub fn Parser::compound(
   let discriminant = self.declaration(depth + 1)
   self.expect(")")
   self.expect("{")
+  let names : Map[String, Bool] = Map([])
+  names[discriminant.name] = true
   let arms : Array[Arm] = []
   let seen : Map[Int64, Bool] = Map([])
   let mut fallback : Type? = None
@@ -83,7 +96,7 @@ pub fn Parser::compound(
       }
       self.expect("default")
       self.expect(":")
-      fallback = Some(self.arm_type(depth + 1))
+      fallback = Some(self.arm_type(depth + 1, names~))
     } else {
       let labels : Array[Int64] = []
       while self.peek() == "case" {
@@ -99,7 +112,7 @@ pub fn Parser::compound(
       if labels.is_empty() {
         raise Invalid(self.offset(), "expected union case or default")
       }
-      arms.push({ labels, ty: self.arm_type(depth + 1), })
+      arms.push({ labels, ty: self.arm_type(depth + 1, names~), })
     }
   }
   self.expect("}")

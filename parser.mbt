@@ -158,6 +158,12 @@ pub fn Parser::declaration(self : Parser, depth : Int) -> Field raise XdrError {
     }
   }
   let base = self.base_type(depth)
+  if base is TVoid {
+    raise Invalid(
+      self.offset(),
+      "void declaration must stand alone in a union arm",
+    )
+  }
   let pointer = self.peek() == "*"
   if pointer {
     self.expect("*")

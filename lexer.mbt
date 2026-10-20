@@ -6,12 +6,12 @@ pub(all) struct Token {
 
 ///|
 pub fn ident_start(c : Char) -> Bool {
-  (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_'
+  (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
 }
 
 ///|
 pub fn ident_continue(c : Char) -> Bool {
-  ident_start(c) || (c >= '0' && c <= '9')
+  ident_start(c) || (c >= '0' && c <= '9') || c == '_'
 }
 
 ///|
@@ -29,7 +29,12 @@ pub fn tokenize(
   let mut i = 0
   while i < cs.length() {
     let c = cs[i]
-    if c == ' ' || c == '\n' || c == '\r' || c == '\t' {
+    if c == ' ' ||
+      c == '\n' ||
+      c == '\r' ||
+      c == '\t' ||
+      c == '\u000b' ||
+      c == '\u000c' {
       i += 1
       continue
     }
@@ -53,7 +58,7 @@ pub fn tokenize(
       continue
     }
     let start = i
-    if ident_start(c) || (c >= '0' && c <= '9') || c == '-' {
+    if ident_start(c) || (c >= '0' && c <= '9') || c == '_' || c == '-' {
       i += 1
       while i < cs.length() && ident_continue(cs[i]) {
         i += 1
@@ -85,53 +90,4 @@ pub fn tokenize(
   }
   out.push({ text: "", offset: source.length(), })
   out
-}
-
-///|
-/// Constant syntax follows C decimal, octal and hexadecimal, within signed 32-bit.
-pub fn parse_constant_number(
-  text : String,
-  offset? : Int = 0,
-) -> Int raise XdrError {
-  let cs = text.to_array()
-  let mut i = 0
-  let negative = cs.length() > 0 && cs[0] == '-'
-  if negative {
-    i = 1
-  }
-  if i >= cs.length() {
-    raise Invalid(offset, "missing integer digits")
-  }
-  let mut radix = 10L
-  if i + 1 < cs.length() && cs[i] == '0' {
-    if cs[i + 1] == 'x' || cs[i + 1] == 'X' {
-      radix = 16L
-      i += 2
-    } else {
-      radix = 8L
-    }
-  }
-  if i >= cs.length() {
-    raise Invalid(offset, "missing hexadecimal digits")
-  }
-  let mut n = 0L
-  let bound = if negative { 2147483648L } else { 2147483647L }
-  while i < cs.length() {
-    let c = cs[i]
-    let digit = if c >= '0' && c <= '9' {
-      c.to_int() - 48
-    } else if c >= 'a' && c <= 'f' {
-      c.to_int() - 87
-    } else if c >= 'A' && c <= 'F' {
-      c.to_int() - 55
-    } else {
-      raise Invalid(offset + i, "invalid integer digit")
-    }
-    if digit.to_int64() >= radix || n > (bound - digit.to_int64()) / radix {
-      raise Invalid(offset + i, "integer out of range")
-    }
-    n = n * radix + digit.to_int64()
-    i += 1
-  }
-  (if negative { -n } else { n }).to_int()
 }

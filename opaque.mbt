@@ -73,6 +73,11 @@ pub fn Writer::write_string(
   text : String,
   bound? : UInt = 1048576U,
 ) -> Unit raise XdrError {
+  // ASCII occupies exactly one byte per character; check before copying input.
+  if text.length().reinterpret_as_uint() > bound ||
+    text.length() > self.limits.max_bytes - self.length() - 4 {
+    raise Invalid(self.length(), "string bound or byte resource limit")
+  }
   let bytes : Array[Byte] = []
   for c in text.iter() {
     if c.to_int() > 127 {

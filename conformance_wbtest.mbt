@@ -162,3 +162,74 @@ test "changing operation limits never changes schema declared bound" {
   )
   assert_true(rejects_wire(s, "O", [0, 0, 0, 65]))
 }
+
+///|
+test "union declaration member scopes and standalone void are checked" {
+  for
+    source in [
+      "union U switch(int tag) { case 0: int tag; };", "union U switch(int tag) { case 0: int repeated; default: int repeated; };",
+      "typedef void NamedVoid;", "typedef int _bad;", "enum E { A=0, };",
+    ] {
+    assert_true(rejects_schema(source))
+  }
+  let s = parse_schema(
+    "union U switch(int tag) { case 0: struct { int tag; } nested; default: void; };",
+  )
+  assert_eq(
+    to_hex(encode(s, "U", VUnion(0L, VStruct([("tag", VInt(3))])))),
+    "0000000000000003",
+  )
+}
+
+///|
+test "XDR whitespace comments and legal identifier underbars" {
+  let s = parse_schema("/* comment */\u000btypedef\u000cunsigned int Item_id;")
+  assert_true(s.lookup("Item_id") is TUInt)
+  assert_eq(to_hex(encode(s, "Item_id", VUInt(4294967295U))), "ffffffff")
+}
+
+///|
+test "RFC section 7 published file wire vector through independently named schema" {
+  let s = parse_schema(
+    "enum K { TXT=0, RAW=1, BIN=2 }; union Info switch(K kind) { case TXT: void; case RAW: string maker<255>; case BIN: string runtime<255>; }; struct Entry { string name<255>; Info info; string account<32>; opaque content<65535>; };",
+  )
+  let v = VStruct([
+    ("name", VString("sillyprog")),
+    ("info", VUnion(2L, VString("lisp"))),
+    ("account", VString("john")),
+    ("content", VOpaque([40, 113, 117, 105, 116, 41])),
+  ])
+  let expected = "0000000973696c6c7970726f6700000000000002000000046c697370000000046a6f686e000000062871756974290000"
+  assert_eq(to_hex(encode(s, "Entry", v)), expected)
+  assert_eq(
+    to_hex(encode(s, "Entry", decode(s, "Entry", from_hex(expected)))),
+    expected,
+  )
+}
+
+///|
+test "optional data is wire equivalent to bool discriminated union" {
+  let s = parse_schema(
+    "typedef int *Maybe; union U switch(bool present) { case FALSE: void; case TRUE: int data; };",
+  )
+  assert_true(
+    encode(s, "Maybe", VOptional(None)) == encode(s, "U", VUnion(0L, VVoid)),
+  )
+  assert_true(
+    encode(s, "Maybe", VOptional(Some(VInt(-17)))) ==
+    encode(s, "U", VUnion(1L, VInt(-17))),
+  )
+  assert_true(rejects_wire(s, "Maybe", [0, 0, 0, 2]))
+  assert_true(rejects_wire(s, "U", [0, 0, 0, 2]))
+}
+
+///|
+test "embedded ASCII nul is preserved with length not a C terminator" {
+  let s = parse_schema("typedef string S<>;")
+  let value = VString("a\u0000b")
+  assert_eq(to_hex(encode(s, "S", value)), "0000000361006200")
+  assert_true(
+    decode(s, "S", from_hex("0000000361006200")) is VString("a\u0000b"),
+  )
+  assert_true(rejects_wire(s, "S", from_hex("0000000361006201")))
+}

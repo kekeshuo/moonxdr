@@ -73,8 +73,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     content, raw_count, double_count = corpus()
     if args.check:
-        normalize = lambda s: ''.join(s.split()).replace(',)', ')').replace(',]', ']')
+        normalize = lambda s: ''.join(s.split()).replace(',)', ')').replace(',]', ']').replace(',}', '}')
         assert normalize(OUT.read_text(encoding='utf-8-sig')) == normalize(content), 'binary128 corpus changed'
     else:
         OUT.write_text(content, encoding='utf-8')
     print(f'binary128 network vectors={raw_count}; rational binary64 widening vectors={double_count}')
+

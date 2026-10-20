@@ -106,7 +106,7 @@ pub struct Parser {
 }
 pub fn Parser::add_constant(Self, String, @bigint.BigInt) -> Unit raise XdrError
 pub fn Parser::add_type(Self, String, Type) -> Unit raise XdrError
-pub fn Parser::arm_type(Self, Int) -> Type raise XdrError
+pub fn Parser::arm_type(Self, Int, names? : Map[String, Bool]) -> Type raise XdrError
 pub fn Parser::base_type(Self, Int) -> Type raise XdrError
 pub fn Parser::bound(Self, String) -> UInt raise XdrError
 pub fn Parser::compound(Self, String, Int) -> Type raise XdrError
