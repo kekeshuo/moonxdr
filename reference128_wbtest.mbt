@@ -2,1624 +2,868 @@
 
 ///|
 test "independent Python integer binary128 network corpus" {
-  let q : Quadruple = { high: 0x0000000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "00000000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0000000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "00000000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x8000000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "80000000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xffffffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "ffffffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x8000000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "80000000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0000800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "00008000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x8000800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "80008000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0000ffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "0000ffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x8000ffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "8000ffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0001000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "00010000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x8001000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "80010000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0001000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "00010000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x8001000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "80010000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0001800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "00018000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x8001800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "80018000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0001ffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "0001ffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x8001ffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "8001ffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3ffe000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "3ffe0000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbffe000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "bffe0000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3ffe000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "3ffe0000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbffe000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "bffe0000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3ffe800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "3ffe8000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbffe800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "bffe8000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3ffeffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "3ffeffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbffeffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "bffeffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3fff000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "3fff0000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbfff000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "bfff0000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3fff000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "3fff0000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbfff000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "bfff0000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3fff800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "3fff8000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbfff800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "bfff8000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3fffffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "3fffffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbfffffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "bfffffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7ffe000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "7ffe0000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xfffe000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "fffe0000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7ffe000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "7ffe0000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xfffe000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "fffe0000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7ffe800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "7ffe8000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xfffe800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "fffe8000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7ffeffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "7ffeffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xfffeffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "fffeffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7fff000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "7fff0000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xffff000000000000UL, low: 0x0000000000000000UL, }
-  let expected = "ffff0000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7fff000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "7fff0000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xffff000000000000UL, low: 0x0000000000000001UL, }
-  let expected = "ffff0000000000000000000000000001"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7fff800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "7fff8000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xffff800000000000UL, low: 0x0000000000000000UL, }
-  let expected = "ffff8000000000000000000000000000"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7fffffffffffffffUL, low: 0xffffffffffffffffUL, }
-  let expected = "7fffffffffffffffffffffffffffffff"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xa116d40655d5d6efUL, low: 0xb50efd62ada779e3UL, }
-  let expected = "a116d40655d5d6efb50efd62ada779e3"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x16c68246a73b249bUL, low: 0x84e5cd3e482e5139UL, }
-  let expected = "16c68246a73b249b84e5cd3e482e5139"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x1bbf5dd7c3e8b9adUL, low: 0x1c27f7b0182f8381UL, }
-  let expected = "1bbf5dd7c3e8b9ad1c27f7b0182f8381"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0040ddbb47b81b19UL, low: 0xfe1068370e7c2f68UL, }
-  let expected = "0040ddbb47b81b19fe1068370e7c2f68"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xfe6ac102cfa349aeUL, low: 0x0a25fea4a5523622UL, }
-  let expected = "fe6ac102cfa349ae0a25fea4a5523622"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x6fb485d9ba9fe532UL, low: 0x84f89fe9e581f49eUL, }
-  let expected = "6fb485d9ba9fe53284f89fe9e581f49e"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x690c5e6b76d077baUL, low: 0xad38e51c9ddf377bUL, }
-  let expected = "690c5e6b76d077baad38e51c9ddf377b"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbbecab761c38073aUL, low: 0x43b1b03dcc541c3dUL, }
-  let expected = "bbecab761c38073a43b1b03dcc541c3d"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x39cdd37d23a02cd2UL, low: 0xc5113f6f51996c27UL, }
-  let expected = "39cdd37d23a02cd2c5113f6f51996c27"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xe028d4a432dc88a7UL, low: 0x6330c15e45ac9384UL, }
-  let expected = "e028d4a432dc88a76330c15e45ac9384"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xf7e48dc597bc1ea7UL, low: 0x3484fbf695db6ebcUL, }
-  let expected = "f7e48dc597bc1ea73484fbf695db6ebc"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xb694468b9656bf1aUL, low: 0x67007a1e72aa0028UL, }
-  let expected = "b694468b9656bf1a67007a1e72aa0028"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xb4d7a25338301e9fUL, low: 0xfc9a03a15d99d695UL, }
-  let expected = "b4d7a25338301e9ffc9a03a15d99d695"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xebe42432639d63cdUL, low: 0x2d969794dc0bc0c9UL, }
-  let expected = "ebe42432639d63cd2d969794dc0bc0c9"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xc8773cbc9efc778cUL, low: 0x86fe9ef194b100a8UL, }
-  let expected = "c8773cbc9efc778c86fe9ef194b100a8"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x81043148be750a23UL, low: 0x67ab26783ae3c817UL, }
-  let expected = "81043148be750a2367ab26783ae3c817"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x454e7c064da3e743UL, low: 0x49a7de52f50160f4UL, }
-  let expected = "454e7c064da3e74349a7de52f50160f4"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xe49e22382e4424ecUL, low: 0x88808a4e74fdb421UL, }
-  let expected = "e49e22382e4424ec88808a4e74fdb421"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xc23ebf7a8aed8174UL, low: 0x1a844902ec53d96fUL, }
-  let expected = "c23ebf7a8aed81741a844902ec53d96f"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3e91aa8dfc7e9b5dUL, low: 0x743cd42851c114c3UL, }
-  let expected = "3e91aa8dfc7e9b5d743cd42851c114c3"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0715fd4cdfa7cbd5UL, low: 0x8bc237202c7298afUL, }
-  let expected = "0715fd4cdfa7cbd58bc237202c7298af"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xf05b023a09fc2feeUL, low: 0x4cf7a3a37dba7c28UL, }
-  let expected = "f05b023a09fc2fee4cf7a3a37dba7c28"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x78092b6a1837977bUL, low: 0x8681439a220d535cUL, }
-  let expected = "78092b6a1837977b8681439a220d535c"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x2b9a68ae620500f7UL, low: 0xf69eca09f66dcc11UL, }
-  let expected = "2b9a68ae620500f7f69eca09f66dcc11"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x84ec2b5902a3c691UL, low: 0x0c9d3d6ec1d286a3UL, }
-  let expected = "84ec2b5902a3c6910c9d3d6ec1d286a3"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x4996ce956e6796f5UL, low: 0x30668b4a6d7d1795UL, }
-  let expected = "4996ce956e6796f530668b4a6d7d1795"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x34154fda23fe2d07UL, low: 0xc2aaa33a16611119UL, }
-  let expected = "34154fda23fe2d07c2aaa33a16611119"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x14cee5bf66f99fcbUL, low: 0xbe8f35fd612d403fUL, }
-  let expected = "14cee5bf66f99fcbbe8f35fd612d403f"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x226376dd5bee055eUL, low: 0xa63275c4ba5ba5f3UL, }
-  let expected = "226376dd5bee055ea63275c4ba5ba5f3"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xda8c96a57ffb9010UL, low: 0xc9362fc6959406aaUL, }
-  let expected = "da8c96a57ffb9010c9362fc6959406aa"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x36e651d702d4b581UL, low: 0x023dcd67687a8edcUL, }
-  let expected = "36e651d702d4b581023dcd67687a8edc"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0b9f9deb3b5c9eb9UL, low: 0x708692b3da85704bUL, }
-  let expected = "0b9f9deb3b5c9eb9708692b3da85704b"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xb57e6fafb330eafcUL, low: 0x912baa5426330b02UL, }
-  let expected = "b57e6fafb330eafc912baa5426330b02"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x9f9f1980f97d965bUL, low: 0xfc06c034532e4a8dUL, }
-  let expected = "9f9f1980f97d965bfc06c034532e4a8d"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x9f40898ffd6a591aUL, low: 0xb5d3a2e050f793acUL, }
-  let expected = "9f40898ffd6a591ab5d3a2e050f793ac"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x6464a4f4ffa524fbUL, low: 0x63157959abcb988aUL, }
-  let expected = "6464a4f4ffa524fb63157959abcb988a"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0a34c1ba3b37ca61UL, low: 0x032610599bea3311UL, }
-  let expected = "0a34c1ba3b37ca61032610599bea3311"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x1bdb0515dba4ea81UL, low: 0x03926e494a02fdbdUL, }
-  let expected = "1bdb0515dba4ea8103926e494a02fdbd"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x78a4b47d917ca01cUL, low: 0xcfeb4b9df996a012UL, }
-  let expected = "78a4b47d917ca01ccfeb4b9df996a012"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xa843602028f06556UL, low: 0x8d20acfcc7ef9adaUL, }
-  let expected = "a843602028f065568d20acfcc7ef9ada"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xadec80a08c5e68dcUL, low: 0x44588f0f4f6179e3UL, }
-  let expected = "adec80a08c5e68dc44588f0f4f6179e3"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x255b5afb2cdf7849UL, low: 0x8bdd4a24509a060fUL, }
-  let expected = "255b5afb2cdf78498bdd4a24509a060f"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x560a73c3df4c4ef3UL, low: 0xe91b9e117cd573e3UL, }
-  let expected = "560a73c3df4c4ef3e91b9e117cd573e3"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x401f38a7554d76a2UL, low: 0xd12dd16975d51f46UL, }
-  let expected = "401f38a7554d76a2d12dd16975d51f46"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x02eaa37d2e8228bbUL, low: 0xc145d5c69c702ad0UL, }
-  let expected = "02eaa37d2e8228bbc145d5c69c702ad0"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7863aa9ee2932654UL, low: 0x26aed636943873bdUL, }
-  let expected = "7863aa9ee293265426aed636943873bd"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x6991acb9660cb2f9UL, low: 0x27e375d6dfaac94fUL, }
-  let expected = "6991acb9660cb2f927e375d6dfaac94f"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3b5749878f6bd36fUL, low: 0x6f27e8ad668dd92cUL, }
-  let expected = "3b5749878f6bd36f6f27e8ad668dd92c"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x4b32a3a41c78f773UL, low: 0x80f36a3abbb4722bUL, }
-  let expected = "4b32a3a41c78f77380f36a3abbb4722b"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xc71d8067579a0d30UL, low: 0x0c160c8f5663ce87UL, }
-  let expected = "c71d8067579a0d300c160c8f5663ce87"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xae43cd7b35383615UL, low: 0xda3b89aa7d36e20fUL, }
-  let expected = "ae43cd7b35383615da3b89aa7d36e20f"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x0ed4bca295cb2892UL, low: 0x79a7d59660de3567UL, }
-  let expected = "0ed4bca295cb289279a7d59660de3567"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x6cc53031e88c74fdUL, low: 0x0d17373313401cbfUL, }
-  let expected = "6cc53031e88c74fd0d17373313401cbf"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xd91215b054d70e9bUL, low: 0x0f6806a02c7caa4fUL, }
-  let expected = "d91215b054d70e9b0f6806a02c7caa4f"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xd2757db7ebb201ecUL, low: 0x99ad5d84e4523005UL, }
-  let expected = "d2757db7ebb201ec99ad5d84e4523005"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x19dc10a7475f8db8UL, low: 0xcc770707fd3a879dUL, }
-  let expected = "19dc10a7475f8db8cc770707fd3a879d"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7ee310c8265d01f4UL, low: 0x70d08210da2f0a2dUL, }
-  let expected = "7ee310c8265d01f470d08210da2f0a2d"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x687935ff91a21502UL, low: 0xad787c4b31cbd601UL, }
-  let expected = "687935ff91a21502ad787c4b31cbd601"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xf80fc4d731ded724UL, low: 0x094ebd4d79b7c6d5UL, }
-  let expected = "f80fc4d731ded724094ebd4d79b7c6d5"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xd5c6218991c07d99UL, low: 0xcedcc49431084e15UL, }
-  let expected = "d5c6218991c07d99cedcc49431084e15"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3219c7265f450ee3UL, low: 0x362228974378a57dUL, }
-  let expected = "3219c7265f450ee3362228974378a57d"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x475e5d0026718f17UL, low: 0xe1a2cb35dac2ac0bUL, }
-  let expected = "475e5d0026718f17e1a2cb35dac2ac0b"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xfca5282ddce69774UL, low: 0xe2e747559842709dUL, }
-  let expected = "fca5282ddce69774e2e747559842709d"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xd84556ae1fc8a2f7UL, low: 0xc3a02c3829674269UL, }
-  let expected = "d84556ae1fc8a2f7c3a02c3829674269"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x59901403126321beUL, low: 0x4473256d513c1fbeUL, }
-  let expected = "59901403126321be4473256d513c1fbe"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x6a0114a91762f916UL, low: 0x083eaa65d5473173UL, }
-  let expected = "6a0114a91762f916083eaa65d5473173"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3af977916f196949UL, low: 0x529592ce4f1cfe98UL, }
-  let expected = "3af977916f196949529592ce4f1cfe98"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x9a99b1896944ddd1UL, low: 0xf08c1c650d13cba7UL, }
-  let expected = "9a99b1896944ddd1f08c1c650d13cba7"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x17def0c5a70a23eaUL, low: 0xb4597066f61236bbUL, }
-  let expected = "17def0c5a70a23eab4597066f61236bb"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x661622518d8c7556UL, low: 0xc428cb312aa21d53UL, }
-  let expected = "661622518d8c7556c428cb312aa21d53"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x61d4bc50000aa87fUL, low: 0x540334e1a67141b7UL, }
-  let expected = "61d4bc50000aa87f540334e1a67141b7"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xfbfac1031135c349UL, low: 0xbef216f6133a8b68UL, }
-  let expected = "fbfac1031135c349bef216f6133a8b68"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x2707eee317935442UL, low: 0x6bfc5ecc72ecab3dUL, }
-  let expected = "2707eee3179354426bfc5ecc72ecab3d"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xed7eb8a4e0906141UL, low: 0x6def310939dfdd12UL, }
-  let expected = "ed7eb8a4e09061416def310939dfdd12"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xa807cbe40fea8761UL, low: 0x16a9abb9b26d264fUL, }
-  let expected = "a807cbe40fea876116a9abb9b26d264f"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x661afd2d276fd4adUL, low: 0xb4bb9f9bc46077c2UL, }
-  let expected = "661afd2d276fd4adb4bb9f9bc46077c2"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xf9b5775b51a40b0fUL, low: 0x8ee640529275e662UL, }
-  let expected = "f9b5775b51a40b0f8ee640529275e662"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x9ba0dada6f294a77UL, low: 0x19978e0ec301c0f7UL, }
-  let expected = "9ba0dada6f294a7719978e0ec301c0f7"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xe77d0efb9e127feaUL, low: 0xad227bf01a2966e0UL, }
-  let expected = "e77d0efb9e127feaad227bf01a2966e0"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x9015c0dacfc096a2UL, low: 0x70978a52f897b809UL, }
-  let expected = "9015c0dacfc096a270978a52f897b809"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x9e4c97096048af0cUL, low: 0x1e05f6d7c80948d0UL, }
-  let expected = "9e4c97096048af0c1e05f6d7c80948d0"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xb0134b54845a31ceUL, low: 0xa3b0634400a2fafbUL, }
-  let expected = "b0134b54845a31cea3b0634400a2fafb"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xa263fc9a66cacee4UL, low: 0x13b3523eb3cbe84bUL, }
-  let expected = "a263fc9a66cacee413b3523eb3cbe84b"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x93028b3cb1110b51UL, low: 0x15f423d0b7f782acUL, }
-  let expected = "93028b3cb1110b5115f423d0b7f782ac"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x22826c4aae5ac432UL, low: 0x23cb3911261622f6UL, }
-  let expected = "22826c4aae5ac43223cb3911261622f6"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x13c8664403a48e31UL, low: 0xb92b0027f3366fd7UL, }
-  let expected = "13c8664403a48e31b92b0027f3366fd7"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xe4c8d9e780694e71UL, low: 0x556effacaff88cfaUL, }
-  let expected = "e4c8d9e780694e71556effacaff88cfa"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x019327fea2d0e7c7UL, low: 0x859cee6d0ebf0338UL, }
-  let expected = "019327fea2d0e7c7859cee6d0ebf0338"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x1899d600f4559d1cUL, low: 0xbd89ed72a5f734cdUL, }
-  let expected = "1899d600f4559d1cbd89ed72a5f734cd"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xa04b5efaf1256bfdUL, low: 0xc1a74c29bbd598f9UL, }
-  let expected = "a04b5efaf1256bfdc1a74c29bbd598f9"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbd4f41f94627df9eUL, low: 0x1a80796e07e00e37UL, }
-  let expected = "bd4f41f94627df9e1a80796e07e00e37"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x2d3eb4cc54bf6ca4UL, low: 0x53dbd9c343d1c72bUL, }
-  let expected = "2d3eb4cc54bf6ca453dbd9c343d1c72b"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x12a81e99102f5397UL, low: 0xc8e4fa9d98b48a21UL, }
-  let expected = "12a81e99102f5397c8e4fa9d98b48a21"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3007c51dacc62600UL, low: 0xe90afc55433d5c86UL, }
-  let expected = "3007c51dacc62600e90afc55433d5c86"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xeaf240771e63b1bfUL, low: 0xc3f585f3fe1faa29UL, }
-  let expected = "eaf240771e63b1bfc3f585f3fe1faa29"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x1636777165db5b7cUL, low: 0x4537b8ebad25d179UL, }
-  let expected = "1636777165db5b7c4537b8ebad25d179"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x3bc6a1819961be6fUL, low: 0xc4c2d581e897913bUL, }
-  let expected = "3bc6a1819961be6fc4c2d581e897913b"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xa3d65872c8c93076UL, low: 0x13a04b8d0fc6ab49UL, }
-  let expected = "a3d65872c8c9307613a04b8d0fc6ab49"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x81e4640947c007d9UL, low: 0x10adc3c475a3136fUL, }
-  let expected = "81e4640947c007d910adc3c475a3136f"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x1f1c713bdce9385eUL, low: 0x70c099633c38c3dfUL, }
-  let expected = "1f1c713bdce9385e70c099633c38c3df"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x4c58d05333911ef4UL, low: 0x0bb41efccb73eeddUL, }
-  let expected = "4c58d05333911ef40bb41efccb73eedd"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xb8cc46a5795e7138UL, low: 0x57292aebe71f3ce9UL, }
-  let expected = "b8cc46a5795e713857292aebe71f3ce9"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xfd99c7873953231bUL, low: 0xae928e1ec59d8a03UL, }
-  let expected = "fd99c7873953231bae928e1ec59d8a03"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xd5cb8c0599570f18UL, low: 0x0c5822131f403c45UL, }
-  let expected = "d5cb8c0599570f180c5822131f403c45"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x5e0c9ac1207ebf0bUL, low: 0x023ddda35037c612UL, }
-  let expected = "5e0c9ac1207ebf0b023ddda35037c612"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x79d5835fc9cab78fUL, low: 0x8291a592c2ebf85bUL, }
-  let expected = "79d5835fc9cab78f8291a592c2ebf85b"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xbc4a9ae77663afcdUL, low: 0xaafb230d33e5e144UL, }
-  let expected = "bc4a9ae77663afcdaafb230d33e5e144"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xb2293e3f10c2d37bUL, low: 0xe24548493303b8beUL, }
-  let expected = "b2293e3f10c2d37be24548493303b8be"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x2eb17cac68ec12a6UL, low: 0x261f771e4fccfab6UL, }
-  let expected = "2eb17cac68ec12a6261f771e4fccfab6"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x059f1adf033cd397UL, low: 0x8c778ae006457328UL, }
-  let expected = "059f1adf033cd3978c778ae006457328"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xb49bddce0833bc44UL, low: 0x2d0a45ae1ca7d734UL, }
-  let expected = "b49bddce0833bc442d0a45ae1ca7d734"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x46176a9e095c668cUL, low: 0x547246b2bbb9ff31UL, }
-  let expected = "46176a9e095c668c547246b2bbb9ff31"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x38306a8a11005968UL, low: 0x28bc8f906fee37a2UL, }
-  let expected = "38306a8a1100596828bc8f906fee37a2"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0xae5acc4bf914324aUL, low: 0x613b1115e819e48bUL, }
-  let expected = "ae5acc4bf914324a613b1115e819e48b"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x5939370e5a541634UL, low: 0xfbcd5a2f4d4bbd9eUL, }
-  let expected = "5939370e5a541634fbcd5a2f4d4bbd9e"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x16e425b92b48f1c8UL, low: 0x23d606b0cfd44b99UL, }
-  let expected = "16e425b92b48f1c823d606b0cfd44b99"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x192055f5ae48e589UL, low: 0x3feaa4a2c0c99c9dUL, }
-  let expected = "192055f5ae48e5893feaa4a2c0c99c9d"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x8af0a542a8a54ac1UL, low: 0x60e7209bc1aa5232UL, }
-  let expected = "8af0a542a8a54ac160e7209bc1aa5232"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x86ffaea316dec39cUL, low: 0x352f41daf6fdb14eUL, }
-  let expected = "86ffaea316dec39c352f41daf6fdb14e"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x4976cee050195825UL, low: 0xade160d8d85d990cUL, }
-  let expected = "4976cee050195825ade160d8d85d990c"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x341b0e1a7100dae5UL, low: 0x3009f05ddd6da9adUL, }
-  let expected = "341b0e1a7100dae53009f05ddd6da9ad"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x214f353db40b699cUL, low: 0x9e1a2ef0e9090757UL, }
-  let expected = "214f353db40b699c9e1a2ef0e9090757"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x4c9d13679053633eUL, low: 0x2b7b274b7178bdf7UL, }
-  let expected = "4c9d13679053633e2b7b274b7178bdf7"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x5bb6ac3d2adbb492UL, low: 0x1cdfe61874d11c39UL, }
-  let expected = "5bb6ac3d2adbb4921cdfe61874d11c39"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x859ccb35bff70ce4UL, low: 0xe10c478df3e9f4beUL, }
-  let expected = "859ccb35bff70ce4e10c478df3e9f4be"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x7b6f1e1f3e2f8e30UL, low: 0x56b2a76f3fd56f27UL, }
-  let expected = "7b6f1e1f3e2f8e3056b2a76f3fd56f27"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x03606b1378e2c7b8UL, low: 0x43847430aa6548bcUL, }
-  let expected = "03606b1378e2c7b843847430aa6548bc"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
-  let q : Quadruple = { high: 0x205cf50b4159949eUL, low: 0x123ba4ee2257e807UL, }
-  let expected = "205cf50b4159949e123ba4ee2257e807"
-  let w = Writer::new()
-  w.write_quadruple(q)
-  assert_eq(to_hex(w.bytes()), expected)
-  assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
+  let vectors : Array[(Quadruple, String)] = [
+    (
+      { high: 0x0000000000000000UL, low: 0x0000000000000000UL, },
+      "00000000000000000000000000000000",
+    ),
+    (
+      { high: 0x0000000000000000UL, low: 0x0000000000000001UL, },
+      "00000000000000000000000000000001",
+    ),
+    (
+      { high: 0x8000000000000000UL, low: 0x0000000000000000UL, },
+      "80000000000000000000000000000000",
+    ),
+    (
+      { high: 0xffffffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "ffffffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0x8000000000000000UL, low: 0x0000000000000001UL, },
+      "80000000000000000000000000000001",
+    ),
+    (
+      { high: 0x0000800000000000UL, low: 0x0000000000000000UL, },
+      "00008000000000000000000000000000",
+    ),
+    (
+      { high: 0x8000800000000000UL, low: 0x0000000000000000UL, },
+      "80008000000000000000000000000000",
+    ),
+    (
+      { high: 0x0000ffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "0000ffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0x8000ffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "8000ffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0x0001000000000000UL, low: 0x0000000000000000UL, },
+      "00010000000000000000000000000000",
+    ),
+    (
+      { high: 0x8001000000000000UL, low: 0x0000000000000000UL, },
+      "80010000000000000000000000000000",
+    ),
+    (
+      { high: 0x0001000000000000UL, low: 0x0000000000000001UL, },
+      "00010000000000000000000000000001",
+    ),
+    (
+      { high: 0x8001000000000000UL, low: 0x0000000000000001UL, },
+      "80010000000000000000000000000001",
+    ),
+    (
+      { high: 0x0001800000000000UL, low: 0x0000000000000000UL, },
+      "00018000000000000000000000000000",
+    ),
+    (
+      { high: 0x8001800000000000UL, low: 0x0000000000000000UL, },
+      "80018000000000000000000000000000",
+    ),
+    (
+      { high: 0x0001ffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "0001ffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0x8001ffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "8001ffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0x3ffe000000000000UL, low: 0x0000000000000000UL, },
+      "3ffe0000000000000000000000000000",
+    ),
+    (
+      { high: 0xbffe000000000000UL, low: 0x0000000000000000UL, },
+      "bffe0000000000000000000000000000",
+    ),
+    (
+      { high: 0x3ffe000000000000UL, low: 0x0000000000000001UL, },
+      "3ffe0000000000000000000000000001",
+    ),
+    (
+      { high: 0xbffe000000000000UL, low: 0x0000000000000001UL, },
+      "bffe0000000000000000000000000001",
+    ),
+    (
+      { high: 0x3ffe800000000000UL, low: 0x0000000000000000UL, },
+      "3ffe8000000000000000000000000000",
+    ),
+    (
+      { high: 0xbffe800000000000UL, low: 0x0000000000000000UL, },
+      "bffe8000000000000000000000000000",
+    ),
+    (
+      { high: 0x3ffeffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "3ffeffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0xbffeffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "bffeffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0x3fff000000000000UL, low: 0x0000000000000000UL, },
+      "3fff0000000000000000000000000000",
+    ),
+    (
+      { high: 0xbfff000000000000UL, low: 0x0000000000000000UL, },
+      "bfff0000000000000000000000000000",
+    ),
+    (
+      { high: 0x3fff000000000000UL, low: 0x0000000000000001UL, },
+      "3fff0000000000000000000000000001",
+    ),
+    (
+      { high: 0xbfff000000000000UL, low: 0x0000000000000001UL, },
+      "bfff0000000000000000000000000001",
+    ),
+    (
+      { high: 0x3fff800000000000UL, low: 0x0000000000000000UL, },
+      "3fff8000000000000000000000000000",
+    ),
+    (
+      { high: 0xbfff800000000000UL, low: 0x0000000000000000UL, },
+      "bfff8000000000000000000000000000",
+    ),
+    (
+      { high: 0x3fffffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "3fffffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0xbfffffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "bfffffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0x7ffe000000000000UL, low: 0x0000000000000000UL, },
+      "7ffe0000000000000000000000000000",
+    ),
+    (
+      { high: 0xfffe000000000000UL, low: 0x0000000000000000UL, },
+      "fffe0000000000000000000000000000",
+    ),
+    (
+      { high: 0x7ffe000000000000UL, low: 0x0000000000000001UL, },
+      "7ffe0000000000000000000000000001",
+    ),
+    (
+      { high: 0xfffe000000000000UL, low: 0x0000000000000001UL, },
+      "fffe0000000000000000000000000001",
+    ),
+    (
+      { high: 0x7ffe800000000000UL, low: 0x0000000000000000UL, },
+      "7ffe8000000000000000000000000000",
+    ),
+    (
+      { high: 0xfffe800000000000UL, low: 0x0000000000000000UL, },
+      "fffe8000000000000000000000000000",
+    ),
+    (
+      { high: 0x7ffeffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "7ffeffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0xfffeffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "fffeffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0x7fff000000000000UL, low: 0x0000000000000000UL, },
+      "7fff0000000000000000000000000000",
+    ),
+    (
+      { high: 0xffff000000000000UL, low: 0x0000000000000000UL, },
+      "ffff0000000000000000000000000000",
+    ),
+    (
+      { high: 0x7fff000000000000UL, low: 0x0000000000000001UL, },
+      "7fff0000000000000000000000000001",
+    ),
+    (
+      { high: 0xffff000000000000UL, low: 0x0000000000000001UL, },
+      "ffff0000000000000000000000000001",
+    ),
+    (
+      { high: 0x7fff800000000000UL, low: 0x0000000000000000UL, },
+      "7fff8000000000000000000000000000",
+    ),
+    (
+      { high: 0xffff800000000000UL, low: 0x0000000000000000UL, },
+      "ffff8000000000000000000000000000",
+    ),
+    (
+      { high: 0x7fffffffffffffffUL, low: 0xffffffffffffffffUL, },
+      "7fffffffffffffffffffffffffffffff",
+    ),
+    (
+      { high: 0xa116d40655d5d6efUL, low: 0xb50efd62ada779e3UL, },
+      "a116d40655d5d6efb50efd62ada779e3",
+    ),
+    (
+      { high: 0x16c68246a73b249bUL, low: 0x84e5cd3e482e5139UL, },
+      "16c68246a73b249b84e5cd3e482e5139",
+    ),
+    (
+      { high: 0x1bbf5dd7c3e8b9adUL, low: 0x1c27f7b0182f8381UL, },
+      "1bbf5dd7c3e8b9ad1c27f7b0182f8381",
+    ),
+    (
+      { high: 0x0040ddbb47b81b19UL, low: 0xfe1068370e7c2f68UL, },
+      "0040ddbb47b81b19fe1068370e7c2f68",
+    ),
+    (
+      { high: 0xfe6ac102cfa349aeUL, low: 0x0a25fea4a5523622UL, },
+      "fe6ac102cfa349ae0a25fea4a5523622",
+    ),
+    (
+      { high: 0x6fb485d9ba9fe532UL, low: 0x84f89fe9e581f49eUL, },
+      "6fb485d9ba9fe53284f89fe9e581f49e",
+    ),
+    (
+      { high: 0x690c5e6b76d077baUL, low: 0xad38e51c9ddf377bUL, },
+      "690c5e6b76d077baad38e51c9ddf377b",
+    ),
+    (
+      { high: 0xbbecab761c38073aUL, low: 0x43b1b03dcc541c3dUL, },
+      "bbecab761c38073a43b1b03dcc541c3d",
+    ),
+    (
+      { high: 0x39cdd37d23a02cd2UL, low: 0xc5113f6f51996c27UL, },
+      "39cdd37d23a02cd2c5113f6f51996c27",
+    ),
+    (
+      { high: 0xe028d4a432dc88a7UL, low: 0x6330c15e45ac9384UL, },
+      "e028d4a432dc88a76330c15e45ac9384",
+    ),
+    (
+      { high: 0xf7e48dc597bc1ea7UL, low: 0x3484fbf695db6ebcUL, },
+      "f7e48dc597bc1ea73484fbf695db6ebc",
+    ),
+    (
+      { high: 0xb694468b9656bf1aUL, low: 0x67007a1e72aa0028UL, },
+      "b694468b9656bf1a67007a1e72aa0028",
+    ),
+    (
+      { high: 0xb4d7a25338301e9fUL, low: 0xfc9a03a15d99d695UL, },
+      "b4d7a25338301e9ffc9a03a15d99d695",
+    ),
+    (
+      { high: 0xebe42432639d63cdUL, low: 0x2d969794dc0bc0c9UL, },
+      "ebe42432639d63cd2d969794dc0bc0c9",
+    ),
+    (
+      { high: 0xc8773cbc9efc778cUL, low: 0x86fe9ef194b100a8UL, },
+      "c8773cbc9efc778c86fe9ef194b100a8",
+    ),
+    (
+      { high: 0x81043148be750a23UL, low: 0x67ab26783ae3c817UL, },
+      "81043148be750a2367ab26783ae3c817",
+    ),
+    (
+      { high: 0x454e7c064da3e743UL, low: 0x49a7de52f50160f4UL, },
+      "454e7c064da3e74349a7de52f50160f4",
+    ),
+    (
+      { high: 0xe49e22382e4424ecUL, low: 0x88808a4e74fdb421UL, },
+      "e49e22382e4424ec88808a4e74fdb421",
+    ),
+    (
+      { high: 0xc23ebf7a8aed8174UL, low: 0x1a844902ec53d96fUL, },
+      "c23ebf7a8aed81741a844902ec53d96f",
+    ),
+    (
+      { high: 0x3e91aa8dfc7e9b5dUL, low: 0x743cd42851c114c3UL, },
+      "3e91aa8dfc7e9b5d743cd42851c114c3",
+    ),
+    (
+      { high: 0x0715fd4cdfa7cbd5UL, low: 0x8bc237202c7298afUL, },
+      "0715fd4cdfa7cbd58bc237202c7298af",
+    ),
+    (
+      { high: 0xf05b023a09fc2feeUL, low: 0x4cf7a3a37dba7c28UL, },
+      "f05b023a09fc2fee4cf7a3a37dba7c28",
+    ),
+    (
+      { high: 0x78092b6a1837977bUL, low: 0x8681439a220d535cUL, },
+      "78092b6a1837977b8681439a220d535c",
+    ),
+    (
+      { high: 0x2b9a68ae620500f7UL, low: 0xf69eca09f66dcc11UL, },
+      "2b9a68ae620500f7f69eca09f66dcc11",
+    ),
+    (
+      { high: 0x84ec2b5902a3c691UL, low: 0x0c9d3d6ec1d286a3UL, },
+      "84ec2b5902a3c6910c9d3d6ec1d286a3",
+    ),
+    (
+      { high: 0x4996ce956e6796f5UL, low: 0x30668b4a6d7d1795UL, },
+      "4996ce956e6796f530668b4a6d7d1795",
+    ),
+    (
+      { high: 0x34154fda23fe2d07UL, low: 0xc2aaa33a16611119UL, },
+      "34154fda23fe2d07c2aaa33a16611119",
+    ),
+    (
+      { high: 0x14cee5bf66f99fcbUL, low: 0xbe8f35fd612d403fUL, },
+      "14cee5bf66f99fcbbe8f35fd612d403f",
+    ),
+    (
+      { high: 0x226376dd5bee055eUL, low: 0xa63275c4ba5ba5f3UL, },
+      "226376dd5bee055ea63275c4ba5ba5f3",
+    ),
+    (
+      { high: 0xda8c96a57ffb9010UL, low: 0xc9362fc6959406aaUL, },
+      "da8c96a57ffb9010c9362fc6959406aa",
+    ),
+    (
+      { high: 0x36e651d702d4b581UL, low: 0x023dcd67687a8edcUL, },
+      "36e651d702d4b581023dcd67687a8edc",
+    ),
+    (
+      { high: 0x0b9f9deb3b5c9eb9UL, low: 0x708692b3da85704bUL, },
+      "0b9f9deb3b5c9eb9708692b3da85704b",
+    ),
+    (
+      { high: 0xb57e6fafb330eafcUL, low: 0x912baa5426330b02UL, },
+      "b57e6fafb330eafc912baa5426330b02",
+    ),
+    (
+      { high: 0x9f9f1980f97d965bUL, low: 0xfc06c034532e4a8dUL, },
+      "9f9f1980f97d965bfc06c034532e4a8d",
+    ),
+    (
+      { high: 0x9f40898ffd6a591aUL, low: 0xb5d3a2e050f793acUL, },
+      "9f40898ffd6a591ab5d3a2e050f793ac",
+    ),
+    (
+      { high: 0x6464a4f4ffa524fbUL, low: 0x63157959abcb988aUL, },
+      "6464a4f4ffa524fb63157959abcb988a",
+    ),
+    (
+      { high: 0x0a34c1ba3b37ca61UL, low: 0x032610599bea3311UL, },
+      "0a34c1ba3b37ca61032610599bea3311",
+    ),
+    (
+      { high: 0x1bdb0515dba4ea81UL, low: 0x03926e494a02fdbdUL, },
+      "1bdb0515dba4ea8103926e494a02fdbd",
+    ),
+    (
+      { high: 0x78a4b47d917ca01cUL, low: 0xcfeb4b9df996a012UL, },
+      "78a4b47d917ca01ccfeb4b9df996a012",
+    ),
+    (
+      { high: 0xa843602028f06556UL, low: 0x8d20acfcc7ef9adaUL, },
+      "a843602028f065568d20acfcc7ef9ada",
+    ),
+    (
+      { high: 0xadec80a08c5e68dcUL, low: 0x44588f0f4f6179e3UL, },
+      "adec80a08c5e68dc44588f0f4f6179e3",
+    ),
+    (
+      { high: 0x255b5afb2cdf7849UL, low: 0x8bdd4a24509a060fUL, },
+      "255b5afb2cdf78498bdd4a24509a060f",
+    ),
+    (
+      { high: 0x560a73c3df4c4ef3UL, low: 0xe91b9e117cd573e3UL, },
+      "560a73c3df4c4ef3e91b9e117cd573e3",
+    ),
+    (
+      { high: 0x401f38a7554d76a2UL, low: 0xd12dd16975d51f46UL, },
+      "401f38a7554d76a2d12dd16975d51f46",
+    ),
+    (
+      { high: 0x02eaa37d2e8228bbUL, low: 0xc145d5c69c702ad0UL, },
+      "02eaa37d2e8228bbc145d5c69c702ad0",
+    ),
+    (
+      { high: 0x7863aa9ee2932654UL, low: 0x26aed636943873bdUL, },
+      "7863aa9ee293265426aed636943873bd",
+    ),
+    (
+      { high: 0x6991acb9660cb2f9UL, low: 0x27e375d6dfaac94fUL, },
+      "6991acb9660cb2f927e375d6dfaac94f",
+    ),
+    (
+      { high: 0x3b5749878f6bd36fUL, low: 0x6f27e8ad668dd92cUL, },
+      "3b5749878f6bd36f6f27e8ad668dd92c",
+    ),
+    (
+      { high: 0x4b32a3a41c78f773UL, low: 0x80f36a3abbb4722bUL, },
+      "4b32a3a41c78f77380f36a3abbb4722b",
+    ),
+    (
+      { high: 0xc71d8067579a0d30UL, low: 0x0c160c8f5663ce87UL, },
+      "c71d8067579a0d300c160c8f5663ce87",
+    ),
+    (
+      { high: 0xae43cd7b35383615UL, low: 0xda3b89aa7d36e20fUL, },
+      "ae43cd7b35383615da3b89aa7d36e20f",
+    ),
+    (
+      { high: 0x0ed4bca295cb2892UL, low: 0x79a7d59660de3567UL, },
+      "0ed4bca295cb289279a7d59660de3567",
+    ),
+    (
+      { high: 0x6cc53031e88c74fdUL, low: 0x0d17373313401cbfUL, },
+      "6cc53031e88c74fd0d17373313401cbf",
+    ),
+    (
+      { high: 0xd91215b054d70e9bUL, low: 0x0f6806a02c7caa4fUL, },
+      "d91215b054d70e9b0f6806a02c7caa4f",
+    ),
+    (
+      { high: 0xd2757db7ebb201ecUL, low: 0x99ad5d84e4523005UL, },
+      "d2757db7ebb201ec99ad5d84e4523005",
+    ),
+    (
+      { high: 0x19dc10a7475f8db8UL, low: 0xcc770707fd3a879dUL, },
+      "19dc10a7475f8db8cc770707fd3a879d",
+    ),
+    (
+      { high: 0x7ee310c8265d01f4UL, low: 0x70d08210da2f0a2dUL, },
+      "7ee310c8265d01f470d08210da2f0a2d",
+    ),
+    (
+      { high: 0x687935ff91a21502UL, low: 0xad787c4b31cbd601UL, },
+      "687935ff91a21502ad787c4b31cbd601",
+    ),
+    (
+      { high: 0xf80fc4d731ded724UL, low: 0x094ebd4d79b7c6d5UL, },
+      "f80fc4d731ded724094ebd4d79b7c6d5",
+    ),
+    (
+      { high: 0xd5c6218991c07d99UL, low: 0xcedcc49431084e15UL, },
+      "d5c6218991c07d99cedcc49431084e15",
+    ),
+    (
+      { high: 0x3219c7265f450ee3UL, low: 0x362228974378a57dUL, },
+      "3219c7265f450ee3362228974378a57d",
+    ),
+    (
+      { high: 0x475e5d0026718f17UL, low: 0xe1a2cb35dac2ac0bUL, },
+      "475e5d0026718f17e1a2cb35dac2ac0b",
+    ),
+    (
+      { high: 0xfca5282ddce69774UL, low: 0xe2e747559842709dUL, },
+      "fca5282ddce69774e2e747559842709d",
+    ),
+    (
+      { high: 0xd84556ae1fc8a2f7UL, low: 0xc3a02c3829674269UL, },
+      "d84556ae1fc8a2f7c3a02c3829674269",
+    ),
+    (
+      { high: 0x59901403126321beUL, low: 0x4473256d513c1fbeUL, },
+      "59901403126321be4473256d513c1fbe",
+    ),
+    (
+      { high: 0x6a0114a91762f916UL, low: 0x083eaa65d5473173UL, },
+      "6a0114a91762f916083eaa65d5473173",
+    ),
+    (
+      { high: 0x3af977916f196949UL, low: 0x529592ce4f1cfe98UL, },
+      "3af977916f196949529592ce4f1cfe98",
+    ),
+    (
+      { high: 0x9a99b1896944ddd1UL, low: 0xf08c1c650d13cba7UL, },
+      "9a99b1896944ddd1f08c1c650d13cba7",
+    ),
+    (
+      { high: 0x17def0c5a70a23eaUL, low: 0xb4597066f61236bbUL, },
+      "17def0c5a70a23eab4597066f61236bb",
+    ),
+    (
+      { high: 0x661622518d8c7556UL, low: 0xc428cb312aa21d53UL, },
+      "661622518d8c7556c428cb312aa21d53",
+    ),
+    (
+      { high: 0x61d4bc50000aa87fUL, low: 0x540334e1a67141b7UL, },
+      "61d4bc50000aa87f540334e1a67141b7",
+    ),
+    (
+      { high: 0xfbfac1031135c349UL, low: 0xbef216f6133a8b68UL, },
+      "fbfac1031135c349bef216f6133a8b68",
+    ),
+    (
+      { high: 0x2707eee317935442UL, low: 0x6bfc5ecc72ecab3dUL, },
+      "2707eee3179354426bfc5ecc72ecab3d",
+    ),
+    (
+      { high: 0xed7eb8a4e0906141UL, low: 0x6def310939dfdd12UL, },
+      "ed7eb8a4e09061416def310939dfdd12",
+    ),
+    (
+      { high: 0xa807cbe40fea8761UL, low: 0x16a9abb9b26d264fUL, },
+      "a807cbe40fea876116a9abb9b26d264f",
+    ),
+    (
+      { high: 0x661afd2d276fd4adUL, low: 0xb4bb9f9bc46077c2UL, },
+      "661afd2d276fd4adb4bb9f9bc46077c2",
+    ),
+    (
+      { high: 0xf9b5775b51a40b0fUL, low: 0x8ee640529275e662UL, },
+      "f9b5775b51a40b0f8ee640529275e662",
+    ),
+    (
+      { high: 0x9ba0dada6f294a77UL, low: 0x19978e0ec301c0f7UL, },
+      "9ba0dada6f294a7719978e0ec301c0f7",
+    ),
+    (
+      { high: 0xe77d0efb9e127feaUL, low: 0xad227bf01a2966e0UL, },
+      "e77d0efb9e127feaad227bf01a2966e0",
+    ),
+    (
+      { high: 0x9015c0dacfc096a2UL, low: 0x70978a52f897b809UL, },
+      "9015c0dacfc096a270978a52f897b809",
+    ),
+    (
+      { high: 0x9e4c97096048af0cUL, low: 0x1e05f6d7c80948d0UL, },
+      "9e4c97096048af0c1e05f6d7c80948d0",
+    ),
+    (
+      { high: 0xb0134b54845a31ceUL, low: 0xa3b0634400a2fafbUL, },
+      "b0134b54845a31cea3b0634400a2fafb",
+    ),
+    (
+      { high: 0xa263fc9a66cacee4UL, low: 0x13b3523eb3cbe84bUL, },
+      "a263fc9a66cacee413b3523eb3cbe84b",
+    ),
+    (
+      { high: 0x93028b3cb1110b51UL, low: 0x15f423d0b7f782acUL, },
+      "93028b3cb1110b5115f423d0b7f782ac",
+    ),
+    (
+      { high: 0x22826c4aae5ac432UL, low: 0x23cb3911261622f6UL, },
+      "22826c4aae5ac43223cb3911261622f6",
+    ),
+    (
+      { high: 0x13c8664403a48e31UL, low: 0xb92b0027f3366fd7UL, },
+      "13c8664403a48e31b92b0027f3366fd7",
+    ),
+    (
+      { high: 0xe4c8d9e780694e71UL, low: 0x556effacaff88cfaUL, },
+      "e4c8d9e780694e71556effacaff88cfa",
+    ),
+    (
+      { high: 0x019327fea2d0e7c7UL, low: 0x859cee6d0ebf0338UL, },
+      "019327fea2d0e7c7859cee6d0ebf0338",
+    ),
+    (
+      { high: 0x1899d600f4559d1cUL, low: 0xbd89ed72a5f734cdUL, },
+      "1899d600f4559d1cbd89ed72a5f734cd",
+    ),
+    (
+      { high: 0xa04b5efaf1256bfdUL, low: 0xc1a74c29bbd598f9UL, },
+      "a04b5efaf1256bfdc1a74c29bbd598f9",
+    ),
+    (
+      { high: 0xbd4f41f94627df9eUL, low: 0x1a80796e07e00e37UL, },
+      "bd4f41f94627df9e1a80796e07e00e37",
+    ),
+    (
+      { high: 0x2d3eb4cc54bf6ca4UL, low: 0x53dbd9c343d1c72bUL, },
+      "2d3eb4cc54bf6ca453dbd9c343d1c72b",
+    ),
+    (
+      { high: 0x12a81e99102f5397UL, low: 0xc8e4fa9d98b48a21UL, },
+      "12a81e99102f5397c8e4fa9d98b48a21",
+    ),
+    (
+      { high: 0x3007c51dacc62600UL, low: 0xe90afc55433d5c86UL, },
+      "3007c51dacc62600e90afc55433d5c86",
+    ),
+    (
+      { high: 0xeaf240771e63b1bfUL, low: 0xc3f585f3fe1faa29UL, },
+      "eaf240771e63b1bfc3f585f3fe1faa29",
+    ),
+    (
+      { high: 0x1636777165db5b7cUL, low: 0x4537b8ebad25d179UL, },
+      "1636777165db5b7c4537b8ebad25d179",
+    ),
+    (
+      { high: 0x3bc6a1819961be6fUL, low: 0xc4c2d581e897913bUL, },
+      "3bc6a1819961be6fc4c2d581e897913b",
+    ),
+    (
+      { high: 0xa3d65872c8c93076UL, low: 0x13a04b8d0fc6ab49UL, },
+      "a3d65872c8c9307613a04b8d0fc6ab49",
+    ),
+    (
+      { high: 0x81e4640947c007d9UL, low: 0x10adc3c475a3136fUL, },
+      "81e4640947c007d910adc3c475a3136f",
+    ),
+    (
+      { high: 0x1f1c713bdce9385eUL, low: 0x70c099633c38c3dfUL, },
+      "1f1c713bdce9385e70c099633c38c3df",
+    ),
+    (
+      { high: 0x4c58d05333911ef4UL, low: 0x0bb41efccb73eeddUL, },
+      "4c58d05333911ef40bb41efccb73eedd",
+    ),
+    (
+      { high: 0xb8cc46a5795e7138UL, low: 0x57292aebe71f3ce9UL, },
+      "b8cc46a5795e713857292aebe71f3ce9",
+    ),
+    (
+      { high: 0xfd99c7873953231bUL, low: 0xae928e1ec59d8a03UL, },
+      "fd99c7873953231bae928e1ec59d8a03",
+    ),
+    (
+      { high: 0xd5cb8c0599570f18UL, low: 0x0c5822131f403c45UL, },
+      "d5cb8c0599570f180c5822131f403c45",
+    ),
+    (
+      { high: 0x5e0c9ac1207ebf0bUL, low: 0x023ddda35037c612UL, },
+      "5e0c9ac1207ebf0b023ddda35037c612",
+    ),
+    (
+      { high: 0x79d5835fc9cab78fUL, low: 0x8291a592c2ebf85bUL, },
+      "79d5835fc9cab78f8291a592c2ebf85b",
+    ),
+    (
+      { high: 0xbc4a9ae77663afcdUL, low: 0xaafb230d33e5e144UL, },
+      "bc4a9ae77663afcdaafb230d33e5e144",
+    ),
+    (
+      { high: 0xb2293e3f10c2d37bUL, low: 0xe24548493303b8beUL, },
+      "b2293e3f10c2d37be24548493303b8be",
+    ),
+    (
+      { high: 0x2eb17cac68ec12a6UL, low: 0x261f771e4fccfab6UL, },
+      "2eb17cac68ec12a6261f771e4fccfab6",
+    ),
+    (
+      { high: 0x059f1adf033cd397UL, low: 0x8c778ae006457328UL, },
+      "059f1adf033cd3978c778ae006457328",
+    ),
+    (
+      { high: 0xb49bddce0833bc44UL, low: 0x2d0a45ae1ca7d734UL, },
+      "b49bddce0833bc442d0a45ae1ca7d734",
+    ),
+    (
+      { high: 0x46176a9e095c668cUL, low: 0x547246b2bbb9ff31UL, },
+      "46176a9e095c668c547246b2bbb9ff31",
+    ),
+    (
+      { high: 0x38306a8a11005968UL, low: 0x28bc8f906fee37a2UL, },
+      "38306a8a1100596828bc8f906fee37a2",
+    ),
+    (
+      { high: 0xae5acc4bf914324aUL, low: 0x613b1115e819e48bUL, },
+      "ae5acc4bf914324a613b1115e819e48b",
+    ),
+    (
+      { high: 0x5939370e5a541634UL, low: 0xfbcd5a2f4d4bbd9eUL, },
+      "5939370e5a541634fbcd5a2f4d4bbd9e",
+    ),
+    (
+      { high: 0x16e425b92b48f1c8UL, low: 0x23d606b0cfd44b99UL, },
+      "16e425b92b48f1c823d606b0cfd44b99",
+    ),
+    (
+      { high: 0x192055f5ae48e589UL, low: 0x3feaa4a2c0c99c9dUL, },
+      "192055f5ae48e5893feaa4a2c0c99c9d",
+    ),
+    (
+      { high: 0x8af0a542a8a54ac1UL, low: 0x60e7209bc1aa5232UL, },
+      "8af0a542a8a54ac160e7209bc1aa5232",
+    ),
+    (
+      { high: 0x86ffaea316dec39cUL, low: 0x352f41daf6fdb14eUL, },
+      "86ffaea316dec39c352f41daf6fdb14e",
+    ),
+    (
+      { high: 0x4976cee050195825UL, low: 0xade160d8d85d990cUL, },
+      "4976cee050195825ade160d8d85d990c",
+    ),
+    (
+      { high: 0x341b0e1a7100dae5UL, low: 0x3009f05ddd6da9adUL, },
+      "341b0e1a7100dae53009f05ddd6da9ad",
+    ),
+    (
+      { high: 0x214f353db40b699cUL, low: 0x9e1a2ef0e9090757UL, },
+      "214f353db40b699c9e1a2ef0e9090757",
+    ),
+    (
+      { high: 0x4c9d13679053633eUL, low: 0x2b7b274b7178bdf7UL, },
+      "4c9d13679053633e2b7b274b7178bdf7",
+    ),
+    (
+      { high: 0x5bb6ac3d2adbb492UL, low: 0x1cdfe61874d11c39UL, },
+      "5bb6ac3d2adbb4921cdfe61874d11c39",
+    ),
+    (
+      { high: 0x859ccb35bff70ce4UL, low: 0xe10c478df3e9f4beUL, },
+      "859ccb35bff70ce4e10c478df3e9f4be",
+    ),
+    (
+      { high: 0x7b6f1e1f3e2f8e30UL, low: 0x56b2a76f3fd56f27UL, },
+      "7b6f1e1f3e2f8e3056b2a76f3fd56f27",
+    ),
+    (
+      { high: 0x03606b1378e2c7b8UL, low: 0x43847430aa6548bcUL, },
+      "03606b1378e2c7b843847430aa6548bc",
+    ),
+    (
+      { high: 0x205cf50b4159949eUL, low: 0x123ba4ee2257e807UL, },
+      "205cf50b4159949e123ba4ee2257e807",
+    ),
+  ]
+  for (q, expected) in vectors {
+    let w = Writer::new()
+    w.write_quadruple(q)
+    assert_eq(to_hex(w.bytes()), expected)
+    assert_eq(Reader::new(from_hex(expected)).read_quadruple(), q)
+  }
 }
 
 ///|
 test "independent Python rational exact binary64 widening corpus" {
-  assert_eq(
-    Quadruple::from_double(0x0000000000000000UL.reinterpret_as_double()).to_hex(),
-    "00000000000000000000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x0000000000000001UL.reinterpret_as_double()).to_hex(),
-    "3bcd0000000000000000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x0000000000000002UL.reinterpret_as_double()).to_hex(),
-    "3bce0000000000000000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x000fffffffffffffUL.reinterpret_as_double()).to_hex(),
-    "3c00ffffffffffffe000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x0010000000000000UL.reinterpret_as_double()).to_hex(),
-    "3c010000000000000000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x3ff0000000000000UL.reinterpret_as_double()).to_hex(),
-    "3fff0000000000000000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x7fefffffffffffffUL.reinterpret_as_double()).to_hex(),
-    "43fefffffffffffff000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x7ff0000000000000UL.reinterpret_as_double()).to_hex(),
-    "7fff0000000000000000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x7ff0000000000001UL.reinterpret_as_double()).to_hex(),
-    "7fff0000000000001000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x7ff8000000000001UL.reinterpret_as_double()).to_hex(),
-    "7fff8000000000001000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x8000000000000000UL.reinterpret_as_double()).to_hex(),
-    "80000000000000000000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xffffffffffffffffUL.reinterpret_as_double()).to_hex(),
-    "fffffffffffffffff000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x4622115129a5a9e7UL.reinterpret_as_double()).to_hex(),
-    "40622115129a5a9e7000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x15d81a4693488506UL.reinterpret_as_double()).to_hex(),
-    "3d5d81a4693488506000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x179a14af82f75fdaUL.reinterpret_as_double()).to_hex(),
-    "3d79a14af82f75fda000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x72bdeedfb73bea39UL.reinterpret_as_double()).to_hex(),
-    "432bdeedfb73bea39000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x6691905b51e9d2ecUL.reinterpret_as_double()).to_hex(),
-    "42691905b51e9d2ec000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x395a9bbeafbdbb4bUL.reinterpret_as_double()).to_hex(),
-    "3f95a9bbeafbdbb4b000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xb49c6d9228ca3f7cUL.reinterpret_as_double()).to_hex(),
-    "bf49c6d9228ca3f7c000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x5f6336a5ad252dbdUL.reinterpret_as_double()).to_hex(),
-    "41f6336a5ad252dbd000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xf42963469f50901cUL.reinterpret_as_double()).to_hex(),
-    "c342963469f50901c000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x2164a2cb9cc29f85UL.reinterpret_as_double()).to_hex(),
-    "3e164a2cb9cc29f85000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xbaf24def87e5165bUL.reinterpret_as_double()).to_hex(),
-    "bfaf24def87e5165b000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x306a93f43effe939UL.reinterpret_as_double()).to_hex(),
-    "3f06a93f43effe939000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x4dece32da77ef6fdUL.reinterpret_as_double()).to_hex(),
-    "40dece32da77ef6fd000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xd780f0cc8f405b35UL.reinterpret_as_double()).to_hex(),
-    "c1780f0cc8f405b35000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xfbaa38e5d40de774UL.reinterpret_as_double()).to_hex(),
-    "c3baa38e5d40de774000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x4a1f94e03327c1dfUL.reinterpret_as_double()).to_hex(),
-    "40a1f94e03327c1df000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x5e0570235caefbeeUL.reinterpret_as_double()).to_hex(),
-    "41e0570235caefbee000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x4b9bd9fcc68834c5UL.reinterpret_as_double()).to_hex(),
-    "40b9bd9fcc68834c5000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x70ebcf9dcec94fa4UL.reinterpret_as_double()).to_hex(),
-    "430ebcf9dcec94fa4000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x06c51817c0c6ec43UL.reinterpret_as_double()).to_hex(),
-    "3c6c51817c0c6ec43000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xef5c335c2a7f556aUL.reinterpret_as_double()).to_hex(),
-    "c2f5c335c2a7f556a000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x0437925cdf76c494UL.reinterpret_as_double()).to_hex(),
-    "3c437925cdf76c494000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x1e8dee15773991afUL.reinterpret_as_double()).to_hex(),
-    "3de8dee15773991af000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xe0fe17fc35c8cec7UL.reinterpret_as_double()).to_hex(),
-    "c20fe17fc35c8cec7000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x28956455d2b419eaUL.reinterpret_as_double()).to_hex(),
-    "3e8956455d2b419ea000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xcfe02ba06c13fc7bUL.reinterpret_as_double()).to_hex(),
-    "c0fe02ba06c13fc7b000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x4a79000599bad59cUL.reinterpret_as_double()).to_hex(),
-    "40a79000599bad59c000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x718a66f2c545d119UL.reinterpret_as_double()).to_hex(),
-    "4318a66f2c545d119000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xaf7492f3061fd1a7UL.reinterpret_as_double()).to_hex(),
-    "bef7492f3061fd1a7000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x55ef10bee4600184UL.reinterpret_as_double()).to_hex(),
-    "415ef10bee4600184000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x52df310c2d40fc38UL.reinterpret_as_double()).to_hex(),
-    "412df310c2d40fc38000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x83ce9927cedad507UL.reinterpret_as_double()).to_hex(),
-    "bc3ce9927cedad507000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xbd5d7bd494a179faUL.reinterpret_as_double()).to_hex(),
-    "bfd5d7bd494a179fa000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x88f578ae80cdb2d3UL.reinterpret_as_double()).to_hex(),
-    "bc8f578ae80cdb2d3000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x395940863fda014fUL.reinterpret_as_double()).to_hex(),
-    "3f95940863fda014f000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x9e6fc44fb34e15d6UL.reinterpret_as_double()).to_hex(),
-    "bde6fc44fb34e15d6000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x0c5e33c16d75463bUL.reinterpret_as_double()).to_hex(),
-    "3cc5e33c16d75463b000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xfae167f30684860dUL.reinterpret_as_double()).to_hex(),
-    "c3ae167f30684860d000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x1c9f7dfac6e1a3c7UL.reinterpret_as_double()).to_hex(),
-    "3dc9f7dfac6e1a3c7000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xb6c75c0ed1ca80ecUL.reinterpret_as_double()).to_hex(),
-    "bf6c75c0ed1ca80ec000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x6468004f928be584UL.reinterpret_as_double()).to_hex(),
-    "42468004f928be584000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xe14139f34c6327ccUL.reinterpret_as_double()).to_hex(),
-    "c214139f34c6327cc000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xd99d7f0d1793ea90UL.reinterpret_as_double()).to_hex(),
-    "c199d7f0d1793ea90000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x89a961bf147e0fdfUL.reinterpret_as_double()).to_hex(),
-    "bc9a961bf147e0fdf000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x0269ee5889235f37UL.reinterpret_as_double()).to_hex(),
-    "3c269ee5889235f37000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xc819c2dfc933c581UL.reinterpret_as_double()).to_hex(),
-    "c0819c2dfc933c581000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x124888db796b311eUL.reinterpret_as_double()).to_hex(),
-    "3d24888db796b311e000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xda7b0cc3cfb24891UL.reinterpret_as_double()).to_hex(),
-    "c1a7b0cc3cfb24891000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x8ce0a03d36e486f9UL.reinterpret_as_double()).to_hex(),
-    "bcce0a03d36e486f9000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xf97fe49804db1d8bUL.reinterpret_as_double()).to_hex(),
-    "c397fe49804db1d8b000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x82414f59596a8837UL.reinterpret_as_double()).to_hex(),
-    "bc2414f59596a8837000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x92085f5df943752eUL.reinterpret_as_double()).to_hex(),
-    "bd2085f5df943752e000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x3bd4fdd72532ca82UL.reinterpret_as_double()).to_hex(),
-    "3fbd4fdd72532ca82000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xd7925b38cc35b3beUL.reinterpret_as_double()).to_hex(),
-    "c17925b38cc35b3be000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x725e9e2cb6292164UL.reinterpret_as_double()).to_hex(),
-    "4325e9e2cb6292164000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x129494f8ba074db3UL.reinterpret_as_double()).to_hex(),
-    "3d29494f8ba074db3000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xc447bb3843700096UL.reinterpret_as_double()).to_hex(),
-    "c0447bb3843700096000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x1cb8b6365d7d2f42UL.reinterpret_as_double()).to_hex(),
-    "3dcb8b6365d7d2f42000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x099be39cbb323057UL.reinterpret_as_double()).to_hex(),
-    "3c99be39cbb323057000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x23477af3d4693d2dUL.reinterpret_as_double()).to_hex(),
-    "3e3477af3d4693d2d000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x9b42ad9d97a6eed4UL.reinterpret_as_double()).to_hex(),
-    "bdb42ad9d97a6eed4000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x40c4a0ee7a1a42c5UL.reinterpret_as_double()).to_hex(),
-    "400c4a0ee7a1a42c5000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xff77df60f3e6fe5aUL.reinterpret_as_double()).to_hex(),
-    "c3f77df60f3e6fe5a000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xb62644270de3dd8cUL.reinterpret_as_double()).to_hex(),
-    "bf62644270de3dd8c000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x93ca74559069d249UL.reinterpret_as_double()).to_hex(),
-    "bd3ca74559069d249000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x4ab85bce8aef15c9UL.reinterpret_as_double()).to_hex(),
-    "40ab85bce8aef15c9000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x6331da1b07069646UL.reinterpret_as_double()).to_hex(),
-    "42331da1b07069646000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x22129c2a51660e48UL.reinterpret_as_double()).to_hex(),
-    "3e2129c2a51660e48000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xbef19ec6b3ec0f2dUL.reinterpret_as_double()).to_hex(),
-    "bfef19ec6b3ec0f2d000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xeecd899add4b806cUL.reinterpret_as_double()).to_hex(),
-    "c2ecd899add4b806c000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xfa7281d3592fdbd0UL.reinterpret_as_double()).to_hex(),
-    "c3a7281d3592fdbd0000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x0ecd3badbd2a4c70UL.reinterpret_as_double()).to_hex(),
-    "3cecd3badbd2a4c70000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x0856cbc3069fdeaaUL.reinterpret_as_double()).to_hex(),
-    "3c856cbc3069fdeaa000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xb15b9da48fbc9e5dUL.reinterpret_as_double()).to_hex(),
-    "bf15b9da48fbc9e5d000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xda39ad52f6c14b60UL.reinterpret_as_double()).to_hex(),
-    "c1a39ad52f6c14b60000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x0cd571a012ee2c6cUL.reinterpret_as_double()).to_hex(),
-    "3ccd571a012ee2c6c000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x53775f68d360f38eUL.reinterpret_as_double()).to_hex(),
-    "413775f68d360f38e000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xf400c3dc9ed7bc5aUL.reinterpret_as_double()).to_hex(),
-    "c3400c3dc9ed7bc5a000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xc4d3c3fb8370ff16UL.reinterpret_as_double()).to_hex(),
-    "c04d3c3fb8370ff16000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xbf29422c6a154333UL.reinterpret_as_double()).to_hex(),
-    "bff29422c6a154333000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x41287818094b9b36UL.reinterpret_as_double()).to_hex(),
-    "401287818094b9b36000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x643b9e72a697cc8dUL.reinterpret_as_double()).to_hex(),
-    "4243b9e72a697cc8d000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x250b7436de663557UL.reinterpret_as_double()).to_hex(),
-    "3e50b7436de663557000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x24eff13d46a06a8bUL.reinterpret_as_double()).to_hex(),
-    "3e4eff13d46a06a8b000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x7726151f17a70295UL.reinterpret_as_double()).to_hex(),
-    "43726151f17a70295000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xf97caf4d88cb4affUL.reinterpret_as_double()).to_hex(),
-    "c397caf4d88cb4aff000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xad1bd4b833e6936cUL.reinterpret_as_double()).to_hex(),
-    "bed1bd4b833e6936c000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x92739f2ac134ac80UL.reinterpret_as_double()).to_hex(),
-    "bd2739f2ac134ac80000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xeee6c73f56ebd122UL.reinterpret_as_double()).to_hex(),
-    "c2ee6c73f56ebd122000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x47d02c542a5bbc35UL.reinterpret_as_double()).to_hex(),
-    "407d02c542a5bbc35000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xf2e24d1443562373UL.reinterpret_as_double()).to_hex(),
-    "c32e24d1443562373000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x326fa33e08b839dcUL.reinterpret_as_double()).to_hex(),
-    "3f26fa33e08b839dc000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x750528c7b148aea8UL.reinterpret_as_double()).to_hex(),
-    "4350528c7b148aea8000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x64eecc1a6bff52f2UL.reinterpret_as_double()).to_hex(),
-    "424eecc1a6bff52f2000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x819671a6bf5a6e14UL.reinterpret_as_double()).to_hex(),
-    "bc19671a6bf5a6e14000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xd23f4bc40c10e385UL.reinterpret_as_double()).to_hex(),
-    "c123f4bc40c10e385000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x9ee24dcc04bc3467UL.reinterpret_as_double()).to_hex(),
-    "bdee24dcc04bc3467000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xd169ca8fbb79d92eUL.reinterpret_as_double()).to_hex(),
-    "c1169ca8fbb79d92e000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x9dd0b3595aa71739UL.reinterpret_as_double()).to_hex(),
-    "bddd0b3595aa71739000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x2def1b0892bdb1a5UL.reinterpret_as_double()).to_hex(),
-    "3edef1b0892bdb1a5000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x97f5f4580006b4eaUL.reinterpret_as_double()).to_hex(),
-    "bd7f5f4580006b4ea000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xf60e046fba43d14aUL.reinterpret_as_double()).to_hex(),
-    "c360e046fba43d14a000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x118107b8c06ada91UL.reinterpret_as_double()).to_hex(),
-    "3d18107b8c06ada91000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x6a6280774ec032d4UL.reinterpret_as_double()).to_hex(),
-    "42a6280774ec032d4000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x04b1a51d9f8369abUL.reinterpret_as_double()).to_hex(),
-    "3c4b1a51d9f8369ab000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xf0b297c4018aa703UL.reinterpret_as_double()).to_hex(),
-    "c30b297c4018aa703000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xf36f8074c2cb7815UL.reinterpret_as_double()).to_hex(),
-    "c336f8074c2cb7815000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x8c5a1c8debd982dcUL.reinterpret_as_double()).to_hex(),
-    "bcc5a1c8debd982dc000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xcd64dc1efbe474bbUL.reinterpret_as_double()).to_hex(),
-    "c0d64dc1efbe474bb000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xf873384aaf189fadUL.reinterpret_as_double()).to_hex(),
-    "c3873384aaf189fad000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xd5ab129029932353UL.reinterpret_as_double()).to_hex(),
-    "c15ab129029932353000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x3856873c57862f6cUL.reinterpret_as_double()).to_hex(),
-    "3f856873c57862f6c000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x35981c75212f4346UL.reinterpret_as_double()).to_hex(),
-    "3f5981c75212f4346000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x9306c7688c71852bUL.reinterpret_as_double()).to_hex(),
-    "bd306c7688c71852b000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x7ef1d556abc4b164UL.reinterpret_as_double()).to_hex(),
-    "43ef1d556abc4b164000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xba122b0277ff534cUL.reinterpret_as_double()).to_hex(),
-    "bfa122b0277ff534c000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xb7eb28de3b86815cUL.reinterpret_as_double()).to_hex(),
-    "bf7eb28de3b86815c000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xc854ba3f2015cdc2UL.reinterpret_as_double()).to_hex(),
-    "c0854ba3f2015cdc2000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x52e500e3080ce835UL.reinterpret_as_double()).to_hex(),
-    "412e500e3080ce835000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x50bd54efa7a9e7cdUL.reinterpret_as_double()).to_hex(),
-    "410bd54efa7a9e7cd000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xa48140cc827977edUL.reinterpret_as_double()).to_hex(),
-    "be48140cc827977ed000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x508348029e701b99UL.reinterpret_as_double()).to_hex(),
-    "4108348029e701b99000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x7a577322748551b7UL.reinterpret_as_double()).to_hex(),
-    "43a577322748551b7000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x368568c26870167dUL.reinterpret_as_double()).to_hex(),
-    "3f68568c26870167d000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xfc452ffef9132a94UL.reinterpret_as_double()).to_hex(),
-    "c3c452ffef9132a94000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0x1da8c83d53223c80UL.reinterpret_as_double()).to_hex(),
-    "3dda8c83d53223c80000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xea4b5e37a8dcdae6UL.reinterpret_as_double()).to_hex(),
-    "c2a4b5e37a8dcdae6000000000000000",
-  )
-  assert_eq(
-    Quadruple::from_double(0xc88f6728c4b1f3b6UL.reinterpret_as_double()).to_hex(),
-    "c088f6728c4b1f3b6000000000000000",
-  )
+  let vectors : Array[(UInt64, String)] = [
+    (0x0000000000000000UL, "00000000000000000000000000000000"),
+    (0x0000000000000001UL, "3bcd0000000000000000000000000000"),
+    (0x0000000000000002UL, "3bce0000000000000000000000000000"),
+    (0x000fffffffffffffUL, "3c00ffffffffffffe000000000000000"),
+    (0x0010000000000000UL, "3c010000000000000000000000000000"),
+    (0x3ff0000000000000UL, "3fff0000000000000000000000000000"),
+    (0x7fefffffffffffffUL, "43fefffffffffffff000000000000000"),
+    (0x7ff0000000000000UL, "7fff0000000000000000000000000000"),
+    (0x7ff0000000000001UL, "7fff0000000000001000000000000000"),
+    (0x7ff8000000000001UL, "7fff8000000000001000000000000000"),
+    (0x8000000000000000UL, "80000000000000000000000000000000"),
+    (0xffffffffffffffffUL, "fffffffffffffffff000000000000000"),
+    (0x4622115129a5a9e7UL, "40622115129a5a9e7000000000000000"),
+    (0x15d81a4693488506UL, "3d5d81a4693488506000000000000000"),
+    (0x179a14af82f75fdaUL, "3d79a14af82f75fda000000000000000"),
+    (0x72bdeedfb73bea39UL, "432bdeedfb73bea39000000000000000"),
+    (0x6691905b51e9d2ecUL, "42691905b51e9d2ec000000000000000"),
+    (0x395a9bbeafbdbb4bUL, "3f95a9bbeafbdbb4b000000000000000"),
+    (0xb49c6d9228ca3f7cUL, "bf49c6d9228ca3f7c000000000000000"),
+    (0x5f6336a5ad252dbdUL, "41f6336a5ad252dbd000000000000000"),
+    (0xf42963469f50901cUL, "c342963469f50901c000000000000000"),
+    (0x2164a2cb9cc29f85UL, "3e164a2cb9cc29f85000000000000000"),
+    (0xbaf24def87e5165bUL, "bfaf24def87e5165b000000000000000"),
+    (0x306a93f43effe939UL, "3f06a93f43effe939000000000000000"),
+    (0x4dece32da77ef6fdUL, "40dece32da77ef6fd000000000000000"),
+    (0xd780f0cc8f405b35UL, "c1780f0cc8f405b35000000000000000"),
+    (0xfbaa38e5d40de774UL, "c3baa38e5d40de774000000000000000"),
+    (0x4a1f94e03327c1dfUL, "40a1f94e03327c1df000000000000000"),
+    (0x5e0570235caefbeeUL, "41e0570235caefbee000000000000000"),
+    (0x4b9bd9fcc68834c5UL, "40b9bd9fcc68834c5000000000000000"),
+    (0x70ebcf9dcec94fa4UL, "430ebcf9dcec94fa4000000000000000"),
+    (0x06c51817c0c6ec43UL, "3c6c51817c0c6ec43000000000000000"),
+    (0xef5c335c2a7f556aUL, "c2f5c335c2a7f556a000000000000000"),
+    (0x0437925cdf76c494UL, "3c437925cdf76c494000000000000000"),
+    (0x1e8dee15773991afUL, "3de8dee15773991af000000000000000"),
+    (0xe0fe17fc35c8cec7UL, "c20fe17fc35c8cec7000000000000000"),
+    (0x28956455d2b419eaUL, "3e8956455d2b419ea000000000000000"),
+    (0xcfe02ba06c13fc7bUL, "c0fe02ba06c13fc7b000000000000000"),
+    (0x4a79000599bad59cUL, "40a79000599bad59c000000000000000"),
+    (0x718a66f2c545d119UL, "4318a66f2c545d119000000000000000"),
+    (0xaf7492f3061fd1a7UL, "bef7492f3061fd1a7000000000000000"),
+    (0x55ef10bee4600184UL, "415ef10bee4600184000000000000000"),
+    (0x52df310c2d40fc38UL, "412df310c2d40fc38000000000000000"),
+    (0x83ce9927cedad507UL, "bc3ce9927cedad507000000000000000"),
+    (0xbd5d7bd494a179faUL, "bfd5d7bd494a179fa000000000000000"),
+    (0x88f578ae80cdb2d3UL, "bc8f578ae80cdb2d3000000000000000"),
+    (0x395940863fda014fUL, "3f95940863fda014f000000000000000"),
+    (0x9e6fc44fb34e15d6UL, "bde6fc44fb34e15d6000000000000000"),
+    (0x0c5e33c16d75463bUL, "3cc5e33c16d75463b000000000000000"),
+    (0xfae167f30684860dUL, "c3ae167f30684860d000000000000000"),
+    (0x1c9f7dfac6e1a3c7UL, "3dc9f7dfac6e1a3c7000000000000000"),
+    (0xb6c75c0ed1ca80ecUL, "bf6c75c0ed1ca80ec000000000000000"),
+    (0x6468004f928be584UL, "42468004f928be584000000000000000"),
+    (0xe14139f34c6327ccUL, "c214139f34c6327cc000000000000000"),
+    (0xd99d7f0d1793ea90UL, "c199d7f0d1793ea90000000000000000"),
+    (0x89a961bf147e0fdfUL, "bc9a961bf147e0fdf000000000000000"),
+    (0x0269ee5889235f37UL, "3c269ee5889235f37000000000000000"),
+    (0xc819c2dfc933c581UL, "c0819c2dfc933c581000000000000000"),
+    (0x124888db796b311eUL, "3d24888db796b311e000000000000000"),
+    (0xda7b0cc3cfb24891UL, "c1a7b0cc3cfb24891000000000000000"),
+    (0x8ce0a03d36e486f9UL, "bcce0a03d36e486f9000000000000000"),
+    (0xf97fe49804db1d8bUL, "c397fe49804db1d8b000000000000000"),
+    (0x82414f59596a8837UL, "bc2414f59596a8837000000000000000"),
+    (0x92085f5df943752eUL, "bd2085f5df943752e000000000000000"),
+    (0x3bd4fdd72532ca82UL, "3fbd4fdd72532ca82000000000000000"),
+    (0xd7925b38cc35b3beUL, "c17925b38cc35b3be000000000000000"),
+    (0x725e9e2cb6292164UL, "4325e9e2cb6292164000000000000000"),
+    (0x129494f8ba074db3UL, "3d29494f8ba074db3000000000000000"),
+    (0xc447bb3843700096UL, "c0447bb3843700096000000000000000"),
+    (0x1cb8b6365d7d2f42UL, "3dcb8b6365d7d2f42000000000000000"),
+    (0x099be39cbb323057UL, "3c99be39cbb323057000000000000000"),
+    (0x23477af3d4693d2dUL, "3e3477af3d4693d2d000000000000000"),
+    (0x9b42ad9d97a6eed4UL, "bdb42ad9d97a6eed4000000000000000"),
+    (0x40c4a0ee7a1a42c5UL, "400c4a0ee7a1a42c5000000000000000"),
+    (0xff77df60f3e6fe5aUL, "c3f77df60f3e6fe5a000000000000000"),
+    (0xb62644270de3dd8cUL, "bf62644270de3dd8c000000000000000"),
+    (0x93ca74559069d249UL, "bd3ca74559069d249000000000000000"),
+    (0x4ab85bce8aef15c9UL, "40ab85bce8aef15c9000000000000000"),
+    (0x6331da1b07069646UL, "42331da1b07069646000000000000000"),
+    (0x22129c2a51660e48UL, "3e2129c2a51660e48000000000000000"),
+    (0xbef19ec6b3ec0f2dUL, "bfef19ec6b3ec0f2d000000000000000"),
+    (0xeecd899add4b806cUL, "c2ecd899add4b806c000000000000000"),
+    (0xfa7281d3592fdbd0UL, "c3a7281d3592fdbd0000000000000000"),
+    (0x0ecd3badbd2a4c70UL, "3cecd3badbd2a4c70000000000000000"),
+    (0x0856cbc3069fdeaaUL, "3c856cbc3069fdeaa000000000000000"),
+    (0xb15b9da48fbc9e5dUL, "bf15b9da48fbc9e5d000000000000000"),
+    (0xda39ad52f6c14b60UL, "c1a39ad52f6c14b60000000000000000"),
+    (0x0cd571a012ee2c6cUL, "3ccd571a012ee2c6c000000000000000"),
+    (0x53775f68d360f38eUL, "413775f68d360f38e000000000000000"),
+    (0xf400c3dc9ed7bc5aUL, "c3400c3dc9ed7bc5a000000000000000"),
+    (0xc4d3c3fb8370ff16UL, "c04d3c3fb8370ff16000000000000000"),
+    (0xbf29422c6a154333UL, "bff29422c6a154333000000000000000"),
+    (0x41287818094b9b36UL, "401287818094b9b36000000000000000"),
+    (0x643b9e72a697cc8dUL, "4243b9e72a697cc8d000000000000000"),
+    (0x250b7436de663557UL, "3e50b7436de663557000000000000000"),
+    (0x24eff13d46a06a8bUL, "3e4eff13d46a06a8b000000000000000"),
+    (0x7726151f17a70295UL, "43726151f17a70295000000000000000"),
+    (0xf97caf4d88cb4affUL, "c397caf4d88cb4aff000000000000000"),
+    (0xad1bd4b833e6936cUL, "bed1bd4b833e6936c000000000000000"),
+    (0x92739f2ac134ac80UL, "bd2739f2ac134ac80000000000000000"),
+    (0xeee6c73f56ebd122UL, "c2ee6c73f56ebd122000000000000000"),
+    (0x47d02c542a5bbc35UL, "407d02c542a5bbc35000000000000000"),
+    (0xf2e24d1443562373UL, "c32e24d1443562373000000000000000"),
+    (0x326fa33e08b839dcUL, "3f26fa33e08b839dc000000000000000"),
+    (0x750528c7b148aea8UL, "4350528c7b148aea8000000000000000"),
+    (0x64eecc1a6bff52f2UL, "424eecc1a6bff52f2000000000000000"),
+    (0x819671a6bf5a6e14UL, "bc19671a6bf5a6e14000000000000000"),
+    (0xd23f4bc40c10e385UL, "c123f4bc40c10e385000000000000000"),
+    (0x9ee24dcc04bc3467UL, "bdee24dcc04bc3467000000000000000"),
+    (0xd169ca8fbb79d92eUL, "c1169ca8fbb79d92e000000000000000"),
+    (0x9dd0b3595aa71739UL, "bddd0b3595aa71739000000000000000"),
+    (0x2def1b0892bdb1a5UL, "3edef1b0892bdb1a5000000000000000"),
+    (0x97f5f4580006b4eaUL, "bd7f5f4580006b4ea000000000000000"),
+    (0xf60e046fba43d14aUL, "c360e046fba43d14a000000000000000"),
+    (0x118107b8c06ada91UL, "3d18107b8c06ada91000000000000000"),
+    (0x6a6280774ec032d4UL, "42a6280774ec032d4000000000000000"),
+    (0x04b1a51d9f8369abUL, "3c4b1a51d9f8369ab000000000000000"),
+    (0xf0b297c4018aa703UL, "c30b297c4018aa703000000000000000"),
+    (0xf36f8074c2cb7815UL, "c336f8074c2cb7815000000000000000"),
+    (0x8c5a1c8debd982dcUL, "bcc5a1c8debd982dc000000000000000"),
+    (0xcd64dc1efbe474bbUL, "c0d64dc1efbe474bb000000000000000"),
+    (0xf873384aaf189fadUL, "c3873384aaf189fad000000000000000"),
+    (0xd5ab129029932353UL, "c15ab129029932353000000000000000"),
+    (0x3856873c57862f6cUL, "3f856873c57862f6c000000000000000"),
+    (0x35981c75212f4346UL, "3f5981c75212f4346000000000000000"),
+    (0x9306c7688c71852bUL, "bd306c7688c71852b000000000000000"),
+    (0x7ef1d556abc4b164UL, "43ef1d556abc4b164000000000000000"),
+    (0xba122b0277ff534cUL, "bfa122b0277ff534c000000000000000"),
+    (0xb7eb28de3b86815cUL, "bf7eb28de3b86815c000000000000000"),
+    (0xc854ba3f2015cdc2UL, "c0854ba3f2015cdc2000000000000000"),
+    (0x52e500e3080ce835UL, "412e500e3080ce835000000000000000"),
+    (0x50bd54efa7a9e7cdUL, "410bd54efa7a9e7cd000000000000000"),
+    (0xa48140cc827977edUL, "be48140cc827977ed000000000000000"),
+    (0x508348029e701b99UL, "4108348029e701b99000000000000000"),
+    (0x7a577322748551b7UL, "43a577322748551b7000000000000000"),
+    (0x368568c26870167dUL, "3f68568c26870167d000000000000000"),
+    (0xfc452ffef9132a94UL, "c3c452ffef9132a94000000000000000"),
+    (0x1da8c83d53223c80UL, "3dda8c83d53223c80000000000000000"),
+    (0xea4b5e37a8dcdae6UL, "c2a4b5e37a8dcdae6000000000000000"),
+    (0xc88f6728c4b1f3b6UL, "c088f6728c4b1f3b6000000000000000"),
+  ]
+  for (bits, expected) in vectors {
+    assert_eq(
+      Quadruple::from_double(bits.reinterpret_as_double()).to_hex(),
+      expected,
+    )
+  }
 }
