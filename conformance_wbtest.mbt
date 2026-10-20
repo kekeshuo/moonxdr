@@ -233,3 +233,12 @@ test "embedded ASCII nul is preserved with length not a C terminator" {
   )
   assert_true(rejects_wire(s, "S", from_hex("0000000361006201")))
 }
+
+///|
+test "array bound identifiers require const definitions not enum symbols" {
+  assert_true(rejects_schema("enum E { N=2 }; typedef int A[N];"))
+  assert_true(rejects_schema("typedef int A[TRUE];"))
+  assert_true(rejects_schema("typedef int A[LATER]; const LATER=2;"))
+  let s = parse_schema("const N=4294967295; typedef opaque Blob<N>;")
+  assert_true(s.lookup("Blob") is TOpaque(4294967295U, true))
+}

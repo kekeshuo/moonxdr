@@ -41,7 +41,7 @@ pub fn Parser::compound(
         raise Invalid(self.offset(), "duplicate enum value")
       }
       seen_values[value] = true
-      self.add_constant(name, literal)
+      self.add_constant(name, literal, definition=false)
       values.push((name, value))
       if self.peek() != "," {
         break

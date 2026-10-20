@@ -99,6 +99,15 @@ pub fn Parser::bound(self : Parser, closing : String) -> UInt raise XdrError {
     }
     4294967295U
   } else {
+    let symbol = self.peek()
+    if symbol != "" &&
+      ident_start(symbol.to_array()[0]) &&
+      !self.schema.constant_defs.contains(symbol) {
+      raise Invalid(
+        self.offset(),
+        "array bound identifier requires a prior const definition",
+      )
+    }
     constant_u32(self.value(), self.offset())
   }
   self.expect(closing)
@@ -200,11 +209,15 @@ pub fn Parser::add_constant(
   self : Parser,
   name : String,
   value : @bigint.BigInt,
+  definition? : Bool = true,
 ) -> Unit raise XdrError {
   if self.schema.types.contains(name) || self.schema.constants.contains(name) {
     raise Invalid(self.offset(), "duplicate symbol: " + name)
   }
   self.schema.constants[name] = value
+  if definition {
+    self.schema.constant_defs[name] = true
+  }
 }
 
 ///|

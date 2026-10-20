@@ -36,6 +36,7 @@ pub(all) struct Arm {
 pub struct Schema {
   types : Map[String, Type]
   constants : Map[String, @bigint.BigInt]
+  constant_defs : Map[String, Bool]
   limits : Limits
 }
 
@@ -100,5 +101,5 @@ pub fn Schema::empty(
   limits? : Limits = Limits::default(),
 ) -> Schema raise XdrError {
   limits.validate()
-  { types: {}, constants: {}, limits, }
+  { types: {}, constants: {}, constant_defs: {}, limits, }
 }
