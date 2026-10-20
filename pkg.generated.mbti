@@ -1,6 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "kekeshuo/moonxdr"
 
+import {
+  "moonbitlang/core/bigint",
+}
+
 // Values
 pub fn decode(Schema, String, Array[Byte]) -> Value raise XdrError
 
@@ -26,6 +30,8 @@ pub fn ident_start(Char) -> Bool
 
 pub fn parse_constant_number(String, offset? : Int) -> Int raise XdrError
 
+pub fn parse_integer_constant(String, offset? : Int) -> @bigint.BigInt raise XdrError
+
 pub fn parse_schema(String, limits? : Limits) -> Schema raise XdrError
 
 pub fn parse_signed_decimal(String) -> Int64 raise XdrError
@@ -38,9 +44,9 @@ pub fn to_json(Schema, String, Value) -> Json raise XdrError
 
 pub fn tokenize(String, limits? : Limits) -> Array[Token] raise XdrError
 
-pub fn union_arm(Array[Arm], Type?, Int) -> Type raise XdrError
+pub fn union_arm(Array[Arm], Type?, Int64) -> Type raise XdrError
 
-pub fn validate_tag(Type, Int) -> Unit raise XdrError
+pub fn validate_tag(Type, Int64) -> Unit raise XdrError
 
 // Errors
 pub suberror XdrError {
@@ -58,7 +64,7 @@ pub(all) enum AcceptStatus {
 }
 
 pub(all) struct Arm {
-  labels : Array[Int]
+  labels : Array[Int64]
   ty : Type
 }
 
@@ -97,11 +103,11 @@ pub struct Parser {
   mut cursor : Int
   schema : Schema
 }
-pub fn Parser::add_constant(Self, String, Int) -> Unit raise XdrError
+pub fn Parser::add_constant(Self, String, @bigint.BigInt) -> Unit raise XdrError
 pub fn Parser::add_type(Self, String, Type) -> Unit raise XdrError
 pub fn Parser::arm_type(Self, Int) -> Type raise XdrError
 pub fn Parser::base_type(Self, Int) -> Type raise XdrError
-pub fn Parser::bound(Self, String) -> Int raise XdrError
+pub fn Parser::bound(Self, String) -> UInt raise XdrError
 pub fn Parser::compound(Self, String, Int) -> Type raise XdrError
 pub fn Parser::declaration(Self, Int) -> Field raise XdrError
 pub fn Parser::expect(Self, String) -> Unit raise XdrError
@@ -110,7 +116,7 @@ pub fn Parser::new(String, limits? : Limits) -> Self raise XdrError
 pub fn Parser::offset(Self) -> Int
 pub fn Parser::peek(Self) -> String
 pub fn Parser::take(Self) -> String raise XdrError
-pub fn Parser::value(Self) -> Int raise XdrError
+pub fn Parser::value(Self) -> @bigint.BigInt raise XdrError
 
 pub struct Reader {
   data : Array[Byte]
@@ -127,10 +133,10 @@ pub fn Reader::read_fixed(Self, Int) -> Array[Byte] raise XdrError
 pub fn Reader::read_float(Self) -> Float raise XdrError
 pub fn Reader::read_hyper(Self) -> Int64 raise XdrError
 pub fn Reader::read_int(Self) -> Int raise XdrError
-pub fn Reader::read_length(Self, Int) -> Int raise XdrError
-pub fn Reader::read_opaque(Self, bound? : Int) -> Array[Byte] raise XdrError
+pub fn Reader::read_length(Self, UInt) -> Int raise XdrError
+pub fn Reader::read_opaque(Self, bound? : UInt) -> Array[Byte] raise XdrError
 pub fn Reader::read_raw(Self, Int) -> Array[Byte] raise XdrError
-pub fn Reader::read_string(Self, bound? : Int) -> String raise XdrError
+pub fn Reader::read_string(Self, bound? : UInt) -> String raise XdrError
 pub fn Reader::read_uhyper(Self) -> UInt64 raise XdrError
 pub fn Reader::read_uint(Self) -> UInt raise XdrError
 pub fn Reader::remaining(Self) -> Int
@@ -176,10 +182,10 @@ pub(all) struct RpcReply {
 
 pub struct Schema {
   types : Map[String, Type]
-  constants : Map[String, Int]
+  constants : Map[String, @bigint.BigInt]
   limits : Limits
 }
-pub fn Schema::constant(Self, String) -> Int?
+pub fn Schema::constant(Self, String) -> @bigint.BigInt?
 pub fn Schema::empty(limits? : Limits) -> Self raise XdrError
 pub fn Schema::lookup(Self, String) -> Type raise XdrError
 pub fn Schema::resolve(Self, Type) -> Type raise XdrError
@@ -200,9 +206,9 @@ pub(all) enum Type {
   TBool
   TFloat
   TDouble
-  TString(Int)
-  TOpaque(Int, Bool)
-  TArray(Type, Int, Bool)
+  TString(UInt)
+  TOpaque(UInt, Bool)
+  TArray(Type, UInt, Bool)
   TOptional(Type)
   TRef(String)
   TEnum(Array[(String, Int)])
@@ -225,7 +231,7 @@ pub(all) enum Value {
   VOptional(Value?)
   VEnum(Int)
   VStruct(Array[(String, Value)])
-  VUnion(Int, Value)
+  VUnion(Int64, Value)
 }
 
 pub struct Writer {
@@ -242,9 +248,9 @@ pub fn Writer::write_fixed(Self, Array[Byte]) -> Unit raise XdrError
 pub fn Writer::write_float(Self, Float) -> Unit raise XdrError
 pub fn Writer::write_hyper(Self, Int64) -> Unit raise XdrError
 pub fn Writer::write_int(Self, Int) -> Unit raise XdrError
-pub fn Writer::write_opaque(Self, Array[Byte], bound? : Int) -> Unit raise XdrError
+pub fn Writer::write_opaque(Self, Array[Byte], bound? : UInt) -> Unit raise XdrError
 pub fn Writer::write_raw(Self, Array[Byte]) -> Unit raise XdrError
-pub fn Writer::write_string(Self, String, bound? : Int) -> Unit raise XdrError
+pub fn Writer::write_string(Self, String, bound? : UInt) -> Unit raise XdrError
 pub fn Writer::write_uhyper(Self, UInt64) -> Unit raise XdrError
 pub fn Writer::write_uint(Self, UInt) -> Unit raise XdrError
 

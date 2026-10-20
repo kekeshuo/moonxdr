@@ -47,8 +47,8 @@ fn json_input_at(
     (TOpaque(_, _), String(s)) => VOpaque(from_hex(s, limits=schema.limits))
     (TArray(inner, bound, variable), Array(items)) => {
       if items.length() > budget.left ||
-        (variable && items.length() > bound) ||
-        (!variable && items.length() != bound) {
+        (variable && items.length().reinterpret_as_uint() > bound) ||
+        (!variable && items.length().reinterpret_as_uint() != bound) {
         raise Invalid(0, "JSON array length limit")
       }
       let out : Array[Value] = []
@@ -98,7 +98,17 @@ fn json_input_at(
         raise Invalid(0, "union JSON requires tag and value")
       }
       let n = match object.get("tag") {
-        Some(j) => json_integer(j)
+        Some(j) => {
+          check_json_integral(j)
+          let n = match j {
+            Number(n, ..) => n
+            _ => raise Invalid(0, "expected union integer")
+          }
+          if n < -2147483648.0 || n > 4294967295.0 {
+            raise Invalid(0, "union tag range")
+          }
+          n.to_int64()
+        }
         None => raise Invalid(0, "missing union tag")
       }
       validate_tag(schema.resolve(tag), n)

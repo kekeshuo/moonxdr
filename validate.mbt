@@ -9,14 +9,7 @@ fn validate_type(
   }
   match ty {
     TRef(name) => ignore(schema.lookup(name))
-    TString(n) | TOpaque(n, _) =>
-      if n < 0 {
-        raise Invalid(0, "negative byte bound")
-      }
-    TArray(inner, n, _) => {
-      if n < 0 {
-        raise Invalid(0, "negative array bound")
-      }
+    TArray(inner, _, _) => {
       if schema.resolve(inner) is TVoid {
         raise Invalid(0, "void array element")
       }
@@ -59,7 +52,7 @@ fn validate_type(
 }
 
 ///|
-pub fn validate_tag(tag : Type, value : Int) -> Unit raise XdrError {
+pub fn validate_tag(tag : Type, value : Int64) -> Unit raise XdrError {
   match tag {
     TBool =>
       if value != 0 && value != 1 {
@@ -67,13 +60,20 @@ pub fn validate_tag(tag : Type, value : Int) -> Unit raise XdrError {
       }
     TEnum(values) => {
       for pair in values {
-        if pair.1 == value {
+        if pair.1.to_int64() == value {
           return
         }
       }
       raise Invalid(0, "unknown enum discriminant")
     }
-    TInt | TUInt => ()
+    TInt =>
+      if value < -2147483648L || value > 2147483647L {
+        raise Invalid(0, "signed discriminant out of range")
+      }
+    TUInt =>
+      if value < 0L || value > 4294967295L {
+        raise Invalid(0, "unsigned discriminant out of range")
+      }
     _ => raise Invalid(0, "invalid discriminant type")
   }
 }
@@ -148,7 +148,7 @@ pub fn Schema::validate(self : Schema) -> Unit raise XdrError {
 pub fn union_arm(
   arms : Array[Arm],
   fallback : Type?,
-  tag : Int,
+  tag : Int64,
 ) -> Type raise XdrError {
   for arm in arms {
     for label in arm.labels {

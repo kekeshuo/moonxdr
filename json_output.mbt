@@ -49,7 +49,7 @@ fn json_output_at(
     }
     VUnion(tag, item) =>
       Json::object({
-        "tag": tag.to_json(),
+        "tag": tag.to_double().to_json(),
         "value": json_output_at(item, budget, depth + 1),
       })
   }

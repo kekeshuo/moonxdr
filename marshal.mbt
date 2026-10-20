@@ -45,14 +45,14 @@ fn encode_at(
       if variable {
         w.write_opaque(b, bound~)
       } else {
-        if b.length() != bound {
+        if b.length().reinterpret_as_uint() != bound {
           raise Invalid(w.length(), "fixed opaque length mismatch")
         }
         w.write_fixed(b)
       }
     (TArray(inner, bound, variable), VArray(values)) => {
-      if (variable && values.length() > bound) ||
-        (!variable && values.length() != bound) {
+      if (variable && values.length().reinterpret_as_uint() > bound) ||
+        (!variable && values.length().reinterpret_as_uint() != bound) {
         raise Invalid(w.length(), "array length mismatch")
       }
       if values.length() > budget.left {
@@ -72,7 +72,7 @@ fn encode_at(
       }
     }
     (TEnum(labels), VEnum(n)) => {
-      validate_tag(TEnum(labels), n)
+      validate_tag(TEnum(labels), n.to_int64())
       w.write_int(n)
     }
     (TStruct(fields), VStruct(values)) => {
@@ -91,7 +91,7 @@ fn encode_at(
     }
     (TUnion(tag, arms, fallback), VUnion(n, v)) => {
       validate_tag(schema.resolve(tag), n)
-      w.write_int(n)
+      w.write_uint(n.to_int().reinterpret_as_uint())
       encode_at(schema, union_arm(arms, fallback, n), v, w, budget, depth + 1)
     }
     _ => raise Invalid(w.length(), "value does not match schema type")

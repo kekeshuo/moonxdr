@@ -36,9 +36,9 @@ pub fn Reader::read_fixed(
 pub fn Writer::write_opaque(
   self : Writer,
   bytes : Array[Byte],
-  bound? : Int = 1048576,
+  bound? : UInt = 1048576U,
 ) -> Unit raise XdrError {
-  if bound < 0 || bytes.length() > bound {
+  if bytes.length().reinterpret_as_uint() > bound {
     raise Invalid(self.length(), "opaque bound exceeded")
   }
   self.write_uint(bytes.length().reinterpret_as_uint())
@@ -46,10 +46,13 @@ pub fn Writer::write_opaque(
 }
 
 ///|
-pub fn Reader::read_length(self : Reader, bound : Int) -> Int raise XdrError {
+pub fn Reader::read_length(self : Reader, bound : UInt) -> Int raise XdrError {
   let length = self.read_uint()
-  if bound < 0 || length > bound.reinterpret_as_uint() {
+  if length > bound {
     raise Invalid(self.pos - 4, "length bound exceeded")
+  }
+  if length > 2147483647U {
+    raise Invalid(self.pos - 4, "length exceeds host index resource limit")
   }
   length.reinterpret_as_int()
 }
@@ -57,7 +60,7 @@ pub fn Reader::read_length(self : Reader, bound : Int) -> Int raise XdrError {
 ///|
 pub fn Reader::read_opaque(
   self : Reader,
-  bound? : Int = 1048576,
+  bound? : UInt = 1048576U,
 ) -> Array[Byte] raise XdrError {
   let n = self.read_length(bound)
   self.read_fixed(n)
@@ -68,7 +71,7 @@ pub fn Reader::read_opaque(
 pub fn Writer::write_string(
   self : Writer,
   text : String,
-  bound? : Int = 1048576,
+  bound? : UInt = 1048576U,
 ) -> Unit raise XdrError {
   let bytes : Array[Byte] = []
   for c in text.iter() {
@@ -88,7 +91,7 @@ pub fn Writer::write_string(
 ///|
 pub fn Reader::read_string(
   self : Reader,
-  bound? : Int = 1048576,
+  bound? : UInt = 1048576U,
 ) -> String raise XdrError {
   let bytes = self.read_opaque(bound~)
   let out = StringBuilder()
@@ -99,4 +102,12 @@ pub fn Reader::read_string(
     out.write_char(b.to_char())
   }
   out.to_string()
+}
+
+///|
+fn checked_count(n : UInt, limit : Int, offset : Int) -> Int raise XdrError {
+  if limit < 0 || n > limit.reinterpret_as_uint() {
+    raise Invalid(offset, "collection resource limit")
+  }
+  n.reinterpret_as_int()
 }

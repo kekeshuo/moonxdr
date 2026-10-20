@@ -27,12 +27,13 @@ pub fn Parser::compound(
     while self.peek() != "}" {
       let name = self.identifier()
       self.expect("=")
-      let value = self.value()
+      let literal = self.value()
+      let value = constant_i32(literal, self.offset())
       if seen_values.contains(value) {
         raise Invalid(self.offset(), "duplicate enum value")
       }
       seen_values[value] = true
-      self.add_constant(name, value)
+      self.add_constant(name, literal)
       values.push((name, value))
       if self.peek() != "," {
         break
@@ -73,7 +74,7 @@ pub fn Parser::compound(
   self.expect(")")
   self.expect("{")
   let arms : Array[Arm] = []
-  let seen : Map[Int, Bool] = Map([])
+  let seen : Map[Int64, Bool] = Map([])
   let mut fallback : Type? = None
   while self.peek() != "}" {
     if self.peek() == "default" {
@@ -84,10 +85,10 @@ pub fn Parser::compound(
       self.expect(":")
       fallback = Some(self.arm_type(depth + 1))
     } else {
-      let labels : Array[Int] = []
+      let labels : Array[Int64] = []
       while self.peek() == "case" {
         self.expect("case")
-        let label = self.value()
+        let label = constant_tag(self.value(), self.offset())
         self.expect(":")
         if seen.contains(label) {
           raise Invalid(self.offset(), "duplicate union case")

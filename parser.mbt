@@ -75,31 +75,31 @@ pub fn Parser::identifier(self : Parser) -> String raise XdrError {
 }
 
 ///|
-pub fn Parser::value(self : Parser) -> Int raise XdrError {
+pub fn Parser::value(self : Parser) -> @bigint.BigInt raise XdrError {
   let offset = self.offset()
   let s = self.take()
   match self.schema.constants.get(s) {
     Some(n) => n
     None =>
       if s == "TRUE" {
-        1
+        @bigint.BigInt::from_int(1)
       } else if s == "FALSE" {
-        0
+        @bigint.BigInt::from_int(0)
       } else {
-        parse_constant_number(s, offset~)
+        parse_integer_constant(s, offset~)
       }
   }
 }
 
 ///|
-pub fn Parser::bound(self : Parser, closing : String) -> Int raise XdrError {
+pub fn Parser::bound(self : Parser, closing : String) -> UInt raise XdrError {
   let n = if self.peek() == closing {
-    self.schema.limits.max_items
+    if closing != ">" {
+      raise Invalid(self.offset(), "missing fixed bound")
+    }
+    4294967295U
   } else {
-    self.value()
-  }
-  if n < 0 {
-    raise Invalid(self.offset(), "negative bound")
+    constant_u32(self.value(), self.offset())
   }
   self.expect(closing)
   n
@@ -192,7 +192,7 @@ pub fn Parser::add_type(
 pub fn Parser::add_constant(
   self : Parser,
   name : String,
-  value : Int,
+  value : @bigint.BigInt,
 ) -> Unit raise XdrError {
   if self.schema.types.contains(name) || self.schema.constants.contains(name) {
     raise Invalid(self.offset(), "duplicate symbol: " + name)

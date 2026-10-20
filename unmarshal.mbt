@@ -23,11 +23,17 @@ fn decode_at(
         if variable {
           r.read_opaque(bound~)
         } else {
-          r.read_fixed(bound)
+          r.read_fixed(
+            checked_count(bound, schema.limits.max_bytes, r.position()),
+          )
         },
       )
     TArray(inner, bound, variable) => {
-      let n = if variable { r.read_length(bound) } else { bound }
+      let n = if variable {
+        r.read_length(bound)
+      } else {
+        checked_count(bound, budget.left, r.position())
+      }
       if n > budget.left {
         raise Invalid(r.position(), "aggregate value item limit")
       }
@@ -45,7 +51,7 @@ fn decode_at(
       }
     TEnum(labels) => {
       let n = r.read_int()
-      validate_tag(TEnum(labels), n)
+      validate_tag(TEnum(labels), n.to_int64())
       VEnum(n)
     }
     TStruct(fields) => {
@@ -58,8 +64,14 @@ fn decode_at(
       VStruct(out)
     }
     TUnion(tag, arms, fallback) => {
-      let n = r.read_int()
-      validate_tag(schema.resolve(tag), n)
+      let resolved = schema.resolve(tag)
+      let bits = r.read_uint()
+      let n = if resolved is TUInt {
+        bits.to_int64()
+      } else {
+        bits.reinterpret_as_int().to_int64()
+      }
+      validate_tag(resolved, n)
       VUnion(
         n,
         decode_at(schema, union_arm(arms, fallback, n), r, budget, depth + 1),

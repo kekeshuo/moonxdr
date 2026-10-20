@@ -9,9 +9,9 @@ pub(all) enum Type {
   TBool
   TFloat
   TDouble
-  TString(Int)
-  TOpaque(Int, Bool)
-  TArray(Type, Int, Bool)
+  TString(UInt)
+  TOpaque(UInt, Bool)
+  TArray(Type, UInt, Bool)
   TOptional(Type)
   TRef(String)
   TEnum(Array[(String, Int)])
@@ -27,14 +27,14 @@ pub(all) struct Field {
 
 ///|
 pub(all) struct Arm {
-  labels : Array[Int]
+  labels : Array[Int64]
   ty : Type
 }
 
 ///|
 pub struct Schema {
   types : Map[String, Type]
-  constants : Map[String, Int]
+  constants : Map[String, @bigint.BigInt]
   limits : Limits
 }
 
@@ -47,7 +47,7 @@ pub fn Schema::lookup(self : Schema, name : String) -> Type raise XdrError {
 }
 
 ///|
-pub fn Schema::constant(self : Schema, name : String) -> Int? {
+pub fn Schema::constant(self : Schema, name : String) -> @bigint.BigInt? {
   self.constants.get(name)
 }
 
@@ -90,7 +90,7 @@ pub(all) enum Value {
   VOptional(Value?)
   VEnum(Int)
   VStruct(Array[(String, Value)])
-  VUnion(Int, Value)
+  VUnion(Int64, Value)
 }
 
 ///|

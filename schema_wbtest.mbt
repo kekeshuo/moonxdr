@@ -69,5 +69,5 @@ test "constant syntax and schema resource boundaries" {
     },
   )
   let s = parse_schema("typedef int X<>;")
-  assert_true(s.lookup("X") is TArray(TInt, 65536, true))
+  assert_true(s.lookup("X") is TArray(TInt, 4294967295U, true))
 }
