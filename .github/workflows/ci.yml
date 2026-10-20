@@ -42,7 +42,9 @@ jobs:
           moon run examples/schema --deny-warn --target ${{ matrix.target }}
           moon run examples/rpc --deny-warn --target ${{ matrix.target }}
           moon run examples/interchange --deny-warn --target ${{ matrix.target }}
+          moon run examples/standard --deny-warn --target ${{ matrix.target }}
       - name: Independent reference vectors and substantive source audit
         run: |
           python3 scripts/reference_vectors.py --check
+          python3 scripts/reference128.py --check
           python3 scripts/audit.py
